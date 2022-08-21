@@ -1,6 +1,10 @@
-***
-
-## 标题： “Redis 位图”&#xA;链接标题： “位图”&#xA;体重： 120&#xA;描述： >&#xA;Redis 位图简介
+---
+title: "Redis bitmaps"
+linkTitle: "Bitmaps"
+weight: 120
+description: >
+    Introduction to Redis bitmaps
+---
 
 Redis 位图是字符串数据类型的扩展，允许您将字符串视为位向量。
 还可以对一个或多个字符串执行按位运算。
@@ -53,4 +57,4 @@ Redis 位图是字符串数据类型的扩展，允许您将字符串视为位�
 ## 了解更多信息
 
 *   [Redis 位图说明](https://www.youtube.com/watch?v=oj8LdJQjhJo)教您如何在在线游戏中使用位图进行地图探索。
-*   [雷迪斯大学的RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 位图。
+*   [Redis University's RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 位图。
