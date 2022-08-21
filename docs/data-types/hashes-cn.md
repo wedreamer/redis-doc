@@ -1,6 +1,10 @@
-***
-
-## 标题： “Redis hashes”&#xA;链接标题： “哈希”&#xA;体重： 40&#xA;描述： >&#xA;Redis 哈希简介
+---
+title: "Redis hashes"
+linkTitle: "Hashes"
+weight: 40
+description: >
+    Introduction to Redis hashes
+---
 
 Redis 哈希是结构化为字段值对集合的记录类型。
 您可以使用哈希来表示基本对象并存储计数器分组等。
@@ -67,5 +71,5 @@ Redis 哈希是结构化为字段值对集合的记录类型。
 
 ## 了解更多信息
 
-*   [Redis Hashes Explained](https://www.youtube.com/watch?v=-KdITaRkQ-U)是一个简短，全面的视频解释器，涵盖了Redis哈希。
-*   [雷迪斯大学的RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 哈希。
+*   [Redis Hashes Explained](https://www.youtube.com/watch?v=-KdITaRkQ-U)是一个简短，全面的视频解释器，涵盖了 Redis 哈希。
+*   [Redis University's RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 哈希。

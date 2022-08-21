@@ -1,6 +1,10 @@
-***
-
-## 标题： “Redis geosspaceial”&#xA;链接标题： “地理空间”&#xA;体重： 80&#xA;描述： >&#xA;Redis 地理空间数据类型简介
+---
+title: "Redis geospatial"
+linkTitle: "Geospatial"
+weight: 80
+description: >
+    Introduction to the Redis Geospatial data type
+---
 
 Redis 地理空间索引允许您存储坐标并进行搜索。
 此数据结构对于查找给定半径或边界框内的邻近点非常有用。
@@ -38,4 +42,4 @@ Redis 地理空间索引允许您存储坐标并进行搜索。
 ## 了解更多信息
 
 *   [Redis Geosspaceal Explained](https://www.youtube.com/watch?v=qftiVQraxmI)通过向您展示如何构建当地公园景点的地图来介绍地理空间索引。
-*   [雷迪斯大学的RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 地理空间索引。
+*   [Redis University's RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 地理空间索引。
