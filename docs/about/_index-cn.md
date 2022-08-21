@@ -1,15 +1,12 @@
-***
-
-标题： Redis 简介
-链接标题： "关于"
-体重： 1
-描述： 了解 Redis 开源项目
-别名：
-
-*   /主题/简介
-*   /嗡嗡声
-
-***
+---
+title: Introduction to Redis
+linkTitle: "About"
+weight: 1
+description: Learn about the Redis open source project
+aliases:
+  - /topics/introduction
+  - /buzz
+---
 
 Redis 是一个开源（BSD 许可），内存中 **数据结构存储** 用作数据库、缓存、消息代理和流式处理引擎。
 Redis 提供[数据结构](/docs/data-types/)

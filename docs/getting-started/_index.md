@@ -47,10 +47,7 @@ At this point you are able to talk with Redis. It is the right time to pause a b
 Securing Redis
 ===
 
-By default Redis binds to **all the interfaces** and has no authentication at
-all. If you use Redis in a very controlled environment, separated from the
-external internet and in general from attackers, that's fine. However if an unhardened Redis
-is exposed to the internet, it is a big security concern. If you are not 100% sure your environment is secured properly, please check the following steps in order to make Redis more secure, which are enlisted in order of increased security.
+By default Redis binds to **all the interfaces** and has no authentication at all. If you use Redis in a very controlled environment, separated from the external internet and in general from attackers, that's fine. However if an unhardened Redis is exposed to the internet, it is a big security concern. If you are not 100% sure your environment is secured properly, please check the following steps in order to make Redis more secure, which are enlisted in order of increased security.
 
 1. Make sure the port Redis uses to listen for connections (by default 6379 and additionally 16379 if you run Redis in cluster mode, plus 26379 for Sentinel) is firewalled, so that it is not possible to contact Redis from the outside world.
 2. Use a configuration file where the `bind` directive is set in order to guarantee that Redis listens on only the network interfaces you are using. For example only the loopback interface (127.0.0.1) if you are accessing Redis just locally from the same computer, and so forth.
@@ -62,18 +59,14 @@ Note that a Redis instance exposed to the internet without any security [is very
 Using Redis from your application
 ===
 
-Of course using Redis just from the command line interface is not enough as
-the goal is to use it from your application. In order to do so you need to
-download and install a Redis client library for your programming language.
+Of course using Redis just from the command line interface is not enough as the goal is to use it from your application. In order to do so you need to download and install a Redis client library for your programming language.
 You'll find a [full list of clients for different languages in this page](https://redis.io/clients).
 
 For instance if you happen to use the Ruby programming language our best advice
 is to use the [Redis-rb](https://github.com/redis/redis-rb) client.
 You can install it using the command **gem install redis**.
 
-These instructions are Ruby specific but actually many library clients for
-popular languages look quite similar: you create a Redis object and execute
-commands calling methods. A short interactive example using Ruby:
+These instructions are Ruby specific but actually many library clients for popular languages look quite similar: you create a Redis object and execute commands calling methods. A short interactive example using Ruby:
 
     >> require 'rubygems'
     => false
