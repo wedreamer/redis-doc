@@ -1,6 +1,12 @@
-***
-
-## 标题： “Redis 客户端处理”&#xA;链接标题： “客户端处理”&#xA;体重： 1&#xA;描述： >&#xA;Redis 服务器如何管理客户端连接&#xA;别名：&#xA;\- /主题/客户
+---
+title: "Redis client handling"
+linkTitle: "Client handling"
+weight: 1
+description: >
+    How the Redis server manages client connections
+aliases:
+    - /topics/clients
+---
 
 本文档提供有关 Redis 如何在网络层级别处理客户端的信息：此处介绍了连接、超时、缓冲区和其他类似主题。
 

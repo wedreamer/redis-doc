@@ -1,15 +1,3 @@
-***
-
-标题：“事件库”
-链接标题： “事件库”
-体重： 1
-描述：什么是事件库，原始 Redis 事件库是如何实现的？
-别名：
-
-*   /topics/internals-eventlib
-*   /topics/internals-rediseventlib
-
-***
 
 **注意：本文档由 Redis 的创建者 Salvatore Sanfilippo 在 Redis 开发早期（约 2010 年）编写，并不一定反映最新的 Redis 实现。**
 

@@ -1,14 +1,3 @@
-***
-
-标题： “哨兵客户端规范”
-链接标题： “哨兵客户端”
-体重： 2
-描述： 如何为 Redis Sentinel 构建客户端
-别名：
-
-*   /topics/sentinel-client
-
-***
 
 Redis Sentinel 是 Redis 实例的监控解决方案，可处理
 Redis 主节点的自动故障转移和服务发现（谁是当前

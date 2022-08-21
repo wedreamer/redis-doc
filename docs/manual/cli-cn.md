@@ -1,6 +1,12 @@
-***
-
-## 标题： “Redis CLI”&#xA;链接标题： “CLI”&#xA;体重： 1&#xA;描述： >&#xA;Redis-cli 概述，Redis 命令行界面&#xA;别名：&#xA;\- /docs/manual/cli
+---
+title: "Redis CLI"
+linkTitle: "CLI"
+weight: 1
+description: >
+    Overview of redis-cli, the Redis command line interface
+aliases:
+    - /docs/manual/cli
+---
 
 Redis 命令行界面 （`redis-cli`） 是一个终端程序，用于向 Redis 服务器发送命令并从 Redis 服务器读取回复。它有两种主要模式：交互式读取评估打印循环（REPL）模式，用户键入Redis命令并接收回复，以及命令模式`redis-cli`使用其他参数执行，并将回复打印到标准输出。
 
@@ -92,8 +98,7 @@ Redis 命令行界面 （`redis-cli`） 是一个终端程序，用于向 Redis 
     $ redis-cli -a myUnguessablePazzzzzword123 PING
     PONG
 
-**注意：**出于安全原因，请将密码提供给`redis-cli`自动通过
-`REDISCLI_AUTH`环境变量。
+**注意：**出于安全原因，请将密码提供给`redis-cli`自动通过 `REDISCLI_AUTH`环境变量。
 
 最后，可以发送对数据库编号进行操作的命令。
 除了默认数字 0 之外，请使用`-n <dbnum>`选择：
@@ -115,21 +120,13 @@ Redis 命令行界面 （`redis-cli`） 是一个终端程序，用于向 Redis 
 
 ## SSL/TLS
 
-默认情况下，`redis-cli`使用纯 TCP 连接连接到 Redis。
-您可以使用`--tls`选项，以及`--cacert`或
-`--cacertdir`以配置受信任的根证书捆绑包或目录。
+默认情况下，`redis-cli`使用纯 TCP 连接连接到 Redis。 您可以使用 `--tls`选项，以及 `--cacert`或 `--cacertdir`以配置受信任的根证书捆绑包或目录。
 
-如果目标服务器要求使用客户端证书进行身份验证，
-您可以使用以下命令指定证书和相应的私钥`--cert`和
-`--key`.
+如果目标服务器要求使用客户端证书进行身份验证，您可以使用以下命令指定证书和相应的私钥 `--cert` 和 `--key`.
 
 ## 从其他程序获取输入
 
-有两种方法可以使用`redis-cli`为了接收来自其他的输入
-通过标准输入的命令。一种是使用目标有效负载作为最后一个参数
-从*标准丁*.例如，为了设置 Redis 键`net_services`
-到文件的内容`/etc/services`从本地文件系统，使用`-x`
-选择：
+有两种方法可以使用`redis-cli`为了接收来自其他的输入通过标准输入的命令。一种是使用目标有效负载作为最后一个参数从*标准丁*.例如，为了设置 Redis 键`net_services` 到文件的内容`/etc/services`从本地文件系统，使用`-x`选择：
 
     $ redis-cli -x SET net_services < /etc/services
     OK
@@ -153,10 +150,7 @@ Redis 命令行界面 （`redis-cli`） 是一个终端程序，用于向 Redis 
     (integer) 6
     "101xxx"
 
-中的所有命令`commands.txt`由 连续执行
-`redis-cli`就好像它们是用户在交互模式下键入的一样。字符串可以是
-如果需要，在文件中引用，以便可以有单个
-带有空格、换行符或其他特殊字符的参数：
+中的所有命令`commands.txt`由 连续执行 `redis-cli`就好像它们是用户在交互模式下键入的一样。字符串可以是如果需要，在文件中引用，以便可以有单个带有空格、换行符或其他特殊字符的参数：
 
     $ cat /tmp/commands.txt
     SET arg_example "This is a single argument"

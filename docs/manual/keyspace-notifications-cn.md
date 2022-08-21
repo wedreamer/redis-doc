@@ -1,9 +1,14 @@
-***
+---
+title: "Redis keyspace notifications"
+linkTitle: "Keyspace notifications"
+weight: 1
+description: >
+    Monitor changes to Redis keys and values in real time
+aliases:
+    - /topics/notifications
+---
 
-## 标题：“Redis 键空间通知”&#xA;链接标题： “键空间通知”&#xA;体重： 1&#xA;描述： >&#xA;实时监控对 Redis 键和值的更改&#xA;别名：&#xA;\- /主题/通知
-
-键空间通知允许客户端按顺序订阅发布/订阅通道
-以某种方式接收影响 Redis 数据集的事件。
+键空间通知允许客户端按顺序订阅发布/订阅通道以某种方式接收影响 Redis 数据集的事件。
 
 可以接收的事件示例包括：
 
@@ -11,48 +16,31 @@
 *   接收 LPUSH 操作的所有密钥。
 *   数据库中所有即将过期的密钥 0.
 
-注意：Redis Pub/Sub 是*火与忘*也就是说，如果您的发布/订阅客户端断开连接，
-并在以后重新连接，在客户端期间传递的所有事件
-断开连接将丢失。
+注意：Redis Pub/Sub 是*火与忘*也就是说，如果您的发布/订阅客户端断开连接，并在以后重新连接，在客户端期间传递的所有事件断开连接将丢失。
 
 ### 事件类型
 
-键空间通知是通过发送两种不同类型的事件来实现的
-对于影响 Redis 数据空间的每个操作。例如`DEL`
-以名为`mykey`在数据库中`0`将触发
-传递两条消息，完全等效于以下两条消息
-`PUBLISH`命令：
+键空间通知是通过发送两种不同类型的事件来实现的对于影响 Redis 数据空间的每个操作。例如`DEL`以名为`mykey`在数据库中`0`将触发传递两条消息，完全等效于以下两条消息`PUBLISH`命令：
 
     PUBLISH __keyspace@0__:mykey del
     PUBLISH __keyevent@0__:del mykey
 
-第一个通道侦听所有事件定位
-关键`mykey`而另一个频道只侦听`del`操作
-键上的事件`mykey`
+第一个通道侦听所有事件定位关键`mykey`而另一个频道只侦听`del`操作键上的事件`mykey`
 
-第一类活动，用`keyspace`频道中的前缀称为
-一个**键空间通知**，而第二个，与`keyevent`前缀
-称为**关键事件通知**.
+第一类活动，用`keyspace`频道中的前缀称为一个**键空间通知**，而第二个，与`keyevent`前缀称为**关键事件通知**.
 
-在前面的示例中，一个`del`为密钥生成事件`mykey`导致
-在两条消息中：
+在前面的示例中，一个`del`为密钥生成事件`mykey`导致在两条消息中：
 
 *   密钥空间通道以消息形式接收事件的名称。
 *   密钥事件通道以消息形式接收密钥的名称。
 
-可以只启用一种通知才能交付
-只是我们感兴趣的事件的子集。
+可以只启用一种通知才能交付只是我们感兴趣的事件的子集。
 
 ### 配置
 
-默认情况下，键空间事件通知处于禁用状态，因为虽然没有
-非常明智的功能使用一些CPU功率。通知已启用
-使用`notify-keyspace-events`的 redis.conf 或通过**配置集**.
+默认情况下，键空间事件通知处于禁用状态，因为虽然没有非常明智的功能使用一些CPU功率。通知已启用使用`notify-keyspace-events`的 redis.conf 或通过**配置集**.
 
-将参数设置为空字符串将禁用通知。
-为了启用该功能，使用非空字符串，由多个组成
-字符，其中每个字符都具有特殊含义，具体取决于
-下表：
+将参数设置为空字符串将禁用通知。为了启用该功能，使用非空字符串，由多个组成字符，其中每个字符都具有特殊含义，具体取决于下表：
 
     K     Keyspace events, published with __keyspace@<db>__ prefix.
     E     Keyevent events, published with __keyevent@<db>__ prefix.
@@ -70,11 +58,9 @@
     n     New key events (Note: not included in the 'A' class)
     A     Alias for "g$lshztxed", so that the "AKE" string means all the events except "m".
 
-至少`K`或`E`应存在于字符串中，否则没有事件
-无论字符串的其余部分如何，都将传递。
+至少`K`或`E`应存在于字符串中，否则没有事件无论字符串的其余部分如何，都将传递。
 
-例如，要仅为列表启用键空间事件，则配置
-参数必须设置为`Kl`，依此类推。
+例如，要仅为列表启用键空间事件，则配置参数必须设置为`Kl`，依此类推。
 
 您可以使用字符串`KEA`以启用大多数类型的事件。
 
@@ -137,16 +123,14 @@
 
 **重要**仅当真正修改了目标键时，所有命令才会生成事件。例如`SREM`从 Set 中删除不存在的元素实际上不会更改键的值，因此不会生成任何事件。
 
-如果对给定命令的事件生成方式有疑问，最简单的
-要做的是观察自己：
+如果对给定命令的事件生成方式有疑问，最简单的要做的是观察自己：
 
     $ redis-cli config set notify-keyspace-events KEA
     $ redis-cli --csv psubscribe '__key*__:*'
     Reading messages... (press Ctrl-C to quit)
     "psubscribe","__key*__:*",1
 
-此时使用`redis-cli`在另一个终端中将命令发送到
-Redis 服务器并观察生成的事件：
+此时使用`redis-cli`在另一个终端中将命令发送到 Redis 服务器并观察生成的事件：
 
     "pmessage","__key*__:*","__keyspace@0__:foo","set"
     "pmessage","__key*__:*","__keyevent@0__:set","foo"

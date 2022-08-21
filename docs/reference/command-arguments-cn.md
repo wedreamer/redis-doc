@@ -1,6 +1,11 @@
-***
-
-## 标题：“Redis 命令参数”&#xA;链接标题： “命令参数”&#xA;体重： 1&#xA;说明：Redis 命令如何以编程方式公开其文档&#xA;别名：&#xA;\- /topics/command-arguments
+---
+title: "Redis command arguments"
+linkTitle: "Command arguments"
+weight: 1
+description: How Redis commands expose their documentation programmatically
+aliases:
+    - /topics/command-arguments
+---
 
 这`COMMAND DOCS`命令返回有关可用 Redis 命令的以文档为中心的信息。
 该命令返回的映射回复包括*参数*钥匙。

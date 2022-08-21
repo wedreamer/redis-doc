@@ -1,14 +1,11 @@
-***
-
-标题：“Redis和Gopher协议”
-链接标题： “Gopher protocol”
-体重： 1
-描述： Redis Gopher 协议实现
-别名：
-
-*   /topics/gopher
-
-***
+---
+title: "Redis and the Gopher protocol"
+linkTitle: "Gopher protocol"
+weight: 1
+description: The Redis Gopher protocol implementation
+aliases:
+  - /topics/gopher
+---
 
 \*\* 注意：删除了对 Gopher 的支持是 Redis 7.0 \*\*
 

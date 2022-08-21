@@ -1,6 +1,12 @@
-***
-
-## 标题： “Redis Lua API reference”&#xA;链接标题： “Lua API”&#xA;体重： 3&#xA;描述： >&#xA;在 Redis 中执行 Lua&#xA;别名：&#xA;\- /topics/lua-api
+---
+title: "Redis Lua API reference"
+linkTitle: "Lua API"
+weight: 3
+description: >
+   Executing Lua in Redis
+aliases:
+    - /topics/lua-api
+---
 
 Redis 包括一个嵌入式[Lua 5.1](https://www.lua.org/)译员。
 解释器运行用户定义的[临时脚本](/topics/eval-intro)和[功能](/topics/functions-intro).脚本在沙盒上下文中运行，只能访问特定的 Lua 包。本页介绍在执行上下文中可用的包和 API。

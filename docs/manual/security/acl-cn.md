@@ -1,6 +1,11 @@
-***
-
-## 标题： “前交叉韧带”&#xA;链接标题： “ACL”&#xA;体重： 1&#xA;描述： Redis 访问控制列表&#xA;别名：&#xA;\- /主题/acl
+---
+title: "ACL"
+linkTitle: "ACL"
+weight: 1
+description: Redis access control list
+aliases:
+    - /topics/acl
+---
 
 Redis ACL是访问控制列表的缩写，是允许某些功能的功能
 连接在可以执行的命令和

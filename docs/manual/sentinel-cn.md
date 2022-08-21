@@ -1,14 +1,11 @@
-***
-
-标题： “Redis Sentinel 的高可用性”
-linkTitle： “Sentinel 的高可用性”
-体重： 1
-描述： 非集群 Redis 的高可用性
-别名：
-
-*   /topics/sentinel
-
-***
+---
+title: "High availability with Redis Sentinel"
+linkTitle: "High availability with Sentinel"
+weight: 1
+description: High availability for non-clustered Redis
+aliases:
+  - /topics/sentinel
+---
 
 Redis Sentinel 在不使用时为 Redis 提供高可用性[Redis Cluster](/docs/manual/scaling).
 

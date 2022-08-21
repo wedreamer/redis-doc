@@ -1,15 +1,12 @@
-***
-
-标题： Redis 集群规范
-链接标题： 集群规范
-体重： 1
-描述： >
-Redis 集群的详细规范
-别名：
-
-*   /topics/cluster-spec
-
-***
+---
+title: Redis cluster specification
+linkTitle: Cluster spec
+weight: 1
+description: >
+    Detailed specification for Redis cluster
+aliases:
+  - /topics/cluster-spec
+---
 
 欢迎来到**Redis 集群规范**.在这里，您将找到信息
 关于 Redis Cluster 的算法和设计原理。本文档是一部作品

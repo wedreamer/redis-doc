@@ -1,6 +1,11 @@
-***
-
-## 标题： “RESP 协议规范”&#xA;链接标题： “协议规范”&#xA;体重： 1&#xA;说明： Redis 序列化协议 （RESP） 规范&#xA;别名：&#xA;\- /主题/协议
+---
+title: "RESP protocol spec"
+linkTitle: "Protocol spec"
+weight: 1
+description: Redis serialization protocol (RESP) specification
+aliases:
+    - /topics/protocol
+---
 
 Redis 客户端使用名为**注册教育储蓄计划**（REdis 序列化协议）与 Redis 服务器进行通信。虽然该协议是专门为Redis设计的，但它可用于其他客户端 - 服务器软件项目。
 

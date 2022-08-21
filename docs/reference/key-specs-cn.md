@@ -1,14 +1,11 @@
-***
-
-标题：“命令键规范”
-链接标题：“命令键规范”
-体重： 1
-描述：什么是命令键规范以及如何在客户端中使用它们
-别名：
-
-*   /主题/键规格
-
-***
+---
+ title: "Command key specifications"
+ linkTitle: "Command key specifications"
+ weight: 1
+ description: What are command key specification and how to use them in your client
+ aliases:
+   - /topics/key-specs
+---
 
 Redis 中的许多命令都接受键名作为输入参数。
 回复中的第 9 个元素`COMMAND`（和`COMMAND INFO`） 是由命令的关键规范组成的数组。

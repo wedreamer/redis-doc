@@ -1,17 +1,3 @@
-***
-
-标题：“Redis 设计草案 #2（历史）”
-链接标题： “Redis 设计草案”
-体重： 2
-描述： 在Redis早期编写的RDB格式设计
-别名：
-
-*   /topics/rdd
-*   /topics/rdd-1
-*   /topics/rdd-2
-
-***
-
 **注意：本文档由Redis的创建者Salvatore Sanfilippo撰写，在Redis开发早期（约2013年），作为一系列设计草案的一部分。这是为了历史利益而保留的。**
 
 # Redis 设计草案 2 -- RDB 版本 7 信息字段

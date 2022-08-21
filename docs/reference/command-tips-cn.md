@@ -1,6 +1,11 @@
-***
-
-## 标题：“Redis 命令提示”&#xA;链接标题：“命令提示”&#xA;体重： 1&#xA;描述： 程序&#xA;别名：&#xA;\- /主题/命令提示
+---
+title: "Redis command tips"
+linkTitle: "Command tips"
+weight: 1
+description: Programm
+aliases:
+    - /topics/command-tips
+---
 
 命令提示是字符串的数组。
 它们为 Redis 客户端提供有关命令的其他信息。

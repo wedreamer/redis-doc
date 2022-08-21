@@ -1,6 +1,12 @@
-***
-
-## 标题： “Redis 函数”&#xA;链接标题： “函数”&#xA;体重： 1&#xA;描述： >&#xA;使用 Redis 7 及更高版本编写脚本&#xA;别名：&#xA;\- /主题/函数介绍
+---
+title: "Redis functions"
+linkTitle: "Functions"
+weight: 1
+description: >
+   Scripting with Redis 7 and beyond
+aliases:
+    - /topics/functions-intro
+---
 
 Redis Functions 是一个 API，用于管理要在服务器上执行的代码。此功能在 Redis 7 中可用，取代了[评估](/docs/manual/programmability/eval-intro)在Redis的先前版本中。
 

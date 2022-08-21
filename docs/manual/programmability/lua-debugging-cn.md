@@ -1,14 +1,11 @@
-***
-
-标题： 在 Redis 中调试 Lua 脚本
-链接标题： 调试 Lua
-描述： 如何使用内置的 Lua 调试器
-体重： 4
-别名：
-
-*   /topics/ldb
-
-***
+---
+title: Debugging Lua scripts in Redis
+linkTitle: Debugging Lua
+description: How to use the built-in Lua debugger
+weight: 4
+aliases:
+  - /topics/ldb
+---
 
 从版本3.2开始，Redis包括一个完整的Lua调试器，可以
 用于使编写复杂的 Redis 脚本的任务更加简单。

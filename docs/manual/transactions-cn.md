@@ -1,14 +1,11 @@
-***
-
-标题： 交易
-链接标题： 交易
-体重： 1
-描述： 交易在 Redis 中的工作原理
-别名：
-
-*   /主题/事务
-
-***
+---
+title: Transactions
+linkTitle: Transactions
+weight: 1
+description: How transactions work in Redis
+aliases:
+  - /topics/transactions
+---
 
 Redis 事务允许执行一组命令
 在一个步骤中，它们以命令为中心

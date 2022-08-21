@@ -1,3 +1,6 @@
-***
-
-## 标题： “雷迪斯手册”&#xA;链接标题： “手册”&#xA;描述： Redis 开发人员指南&#xA;体重： 20
+---
+title: "The Redis manual"
+linkTitle: "Manual"
+description: A developer's guide to Redis
+weight: 20
+---

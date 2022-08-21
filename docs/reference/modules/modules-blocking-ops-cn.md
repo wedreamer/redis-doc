@@ -1,6 +1,3 @@
-***
-
-## 标题：“Redis 模块和阻止命令”&#xA;链接标题：“阻止命令”&#xA;体重： 1&#xA;描述： >&#xA;如何在 Redis 模块中实现阻塞命令&#xA;别名：&#xA;\- /topics/modules-blocking-ops
 
 Redis 在内置命令集中有一些阻塞命令。
 最常用的是`BLPOP`（或对称`BRPOP`） 哪个块

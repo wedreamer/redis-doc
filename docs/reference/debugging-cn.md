@@ -1,6 +1,12 @@
-***
-
-## 标题：“调试”&#xA;链接标题：“调试”&#xA;体重： 1&#xA;描述： >&#xA;调试 Redis 服务器进程的指南&#xA;别名：&#xA;\- /主题/调试
+---
+title: "Debugging"
+linkTitle: "Debugging"
+weight: 1
+description: >
+    A guide to debugging Redis server processes
+aliases:
+    - /topics/debugging
+---
 
 Redis的开发重点是稳定性。我们竭尽所能
 每个版本，以确保您将体验到稳定的产品，没有

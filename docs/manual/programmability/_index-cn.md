@@ -1,6 +1,12 @@
-***
-
-## 标题： “Redis 可编程性”&#xA;链接标题： “可编程性”&#xA;体重： 1&#xA;描述： >&#xA;使用 Lua 和 Redis 函数扩展 Redis&#xA;别名：&#xA;\- /主题/可编程性
+---
+title: "Redis programmability"
+linkTitle: "Programmability"
+weight: 1
+description: >
+   Extending Redis with Lua and Redis Functions
+aliases:
+    - /topics/programmability
+---
 
 Redis 提供了一个编程接口，允许您在服务器本身上执行自定义脚本。在 Redis 7 及更高版本中，您可以使用[Redis Functions](/docs/manual/programmability/functions-intro)以管理和运行脚本。在 Redis 6.2 及更低版本中，您可以使用[使用 EVAL 命令编写 Lua 脚本](/docs/manual/programmability/eval-intro)对服务器进行编程。
 

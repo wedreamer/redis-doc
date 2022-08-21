@@ -1,6 +1,12 @@
-***
-
-## 标题： “ARM 支持”&#xA;链接标题： “ARM 支持”&#xA;体重： 1&#xA;描述： >&#xA;探索 ARM CPU 架构上的 Redis&#xA;别名：&#xA;\- /topics/ARM
+---
+title: "ARM support"
+linkTitle: "ARM support"
+weight: 1
+description: >
+    Exploring Redis on the ARM CPU Architecture
+aliases:
+    - /topics/ARM
+---
 
 Redis 4.0 及更高版本通常支持 ARM 处理器，并且
 特别是Raspberry Pi，作为主平台。Redis 的每个新版本都在 Pi 上进行了测试

@@ -1,6 +1,11 @@
-***
-
-## 标题： “故障排除 Redis”&#xA;链接标题：“疑难解答”&#xA;体重： 1&#xA;描述： Redis 有问题？从这里开始。&#xA;别名：&#xA;\- /主题/问题
+---
+title: "Troubleshooting Redis"
+linkTitle: "Troubleshooting"
+weight: 1
+description: Problems with Redis? Start here.
+aliases:
+    - /topics/problems
+---
 
 本页试图帮助您在 Redis 出现问题时该怎么做。Redis项目的一部分是帮助遇到问题的人，因为我们不喜欢让人们独自处理他们的问题。
 

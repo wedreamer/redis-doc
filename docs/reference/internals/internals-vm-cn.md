@@ -1,15 +1,3 @@
-***
-
-标题：“虚拟内存（已弃用）”
-链接标题：“虚拟内存”
-体重： 1
-描述：对 2.6 中已弃用的 Redis 虚拟内存系统的描述。本文档的存在是为了历史兴趣。
-别名：
-
-*   /topics/internals-vm
-*   /topics/virtual-memory
-
-***
 
 **注意：本文档由Redis的创建者Salvatore Sanfilippo撰写，在Redis开发的早期（约2010年）。自 Redis 2.6 以来，虚拟内存已被弃用，因此本文档
 这里只是为了历史兴趣。**

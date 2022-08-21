@@ -1,6 +1,11 @@
-***
-
-## 标题： “Redis Security”&#xA;链接标题： “安全”&#xA;体重： 1&#xA;描述： Redis 中的安全模型和功能&#xA;别名：&#xA;\- /主题/安全
+---
+title: "Redis security"
+linkTitle: "Security"
+weight: 1
+description: Security model and features in Redis
+aliases:
+    - /topics/security
+---
 
 本文档从以下方面介绍了安全性主题：
 雷迪斯的视图。它涵盖了Redis提供的访问控制，代码安全问题，

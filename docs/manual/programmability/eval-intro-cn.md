@@ -1,6 +1,12 @@
-***
-
-## 标题： “使用 Lua 编写脚本”&#xA;链接标题： “Lua scripting”&#xA;体重： 2&#xA;描述： >&#xA;在 Redis 中执行 Lua&#xA;别名：&#xA;\- /topics/eval-intro
+---
+title: "Scripting with Lua"
+linkTitle: "Lua scripting"
+weight: 2
+description: >
+   Executing Lua in Redis
+aliases:
+    - /topics/eval-intro
+---
 
 Redis允许用户在服务器上上传和执行Lua脚本。
 脚本可以采用编程控制结构，并使用大部分[命令](/commands)同时执行以访问数据库。

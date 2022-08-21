@@ -1,6 +1,3 @@
-***
-
-## title： “用于本机类型的模块 API”&#xA;linkTitle： “Native types API”&#xA;体重： 1&#xA;描述： >&#xA;如何在 Redis 模块中使用本机类型&#xA;别名：&#xA;\- /主题/模块-本机类型
 
 Redis模块可以在高层次上访问Redis内置的数据结构，
 通过调用 Redis 命令，并在低级别通过操作数据结构

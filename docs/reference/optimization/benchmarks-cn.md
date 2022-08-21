@@ -1,6 +1,3 @@
-***
-
-## 标题： “Redis Benchmark”&#xA;链接标题： “基准测试”&#xA;体重： 1&#xA;描述： >&#xA;使用 redis-benchmark 实用程序对 Redis 服务器进行基准测试&#xA;别名：&#xA;\- /主题/基准测试
 
 Redis 包括`redis-benchmark`模拟正在运行的命令完成的实用程序
 通过 N 个客户端同时发送 M 个查询。该实用程序提供
