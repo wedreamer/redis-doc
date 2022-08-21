@@ -177,9 +177,7 @@ foo
 ```
 The client will check if there are cached keys in this caching slot, and will evict the information that is no longer valid.
 
-Note that the third element of the Pub/Sub message is not a single key but
-is a Redis array with just a single element. Since we send an array, if there
-are groups of keys to invalidate, we can do that in a single message.
+Note that the third element of the Pub/Sub message is not a single key but is a Redis array with just a single element. Since we send an array, if there are groups of keys to invalidate, we can do that in a single message.
 In case of a flush (`FLUSHALL` or `FLUSHDB`), a `null` message will be sent.
 
 A very important thing to understand about client-side caching used with
