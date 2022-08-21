@@ -1,8 +1,12 @@
-***
+---
+title: "Redis sorted sets"
+linkTitle: "Sorted sets"
+weight: 50
+description: >
+    Introduction to Redis sorted sets
+---
 
-## 标题： “Redis 排序集”&#xA;链接标题： “排序集”&#xA;体重： 50&#xA;描述： >&#xA;Redis 排序集简介
-
-Redis 排序集是按关联分数排序的唯一字符串（成员）的集合。
+Redis 排序集是按关联值排序的唯一字符串（成员）的集合。
 当多个字符串具有相同的分数时，字符串将按字典顺序排序。
 排序集的一些用例包括：
 
@@ -60,10 +64,10 @@ Redis 排序集是按关联分数排序的唯一字符串（成员）的集合�
 
 ## 性能
 
-大多数排序集操作是 O（log（n）），其中*n*是成员数。
+大多数排序集操作是 O（log（n）），其中 *n* 是成员数。
 
 在运行 时要小心一些`ZRANGE`具有较大返回值的命令（例如，以数万或更多为单位）。
-此命令的时间复杂度为 O（log（n） + m），其中*m*是返回的结果数。
+此命令的时间复杂度为 O（log（n） + m），其中 *m* 是返回的结果数。
 
 ## 选择
 
@@ -73,4 +77,4 @@ Redis 排序集有时用于索引其他 Redis 数据结构。
 ## 了解更多信息
 
 *   [Redis 排序集说明](https://www.youtube.com/watch?v=MUKlxdBQZ7g)是Redis中排序集的有趣介绍。
-*   [雷迪斯大学的RU101](https://university.redis.com/courses/ru101/)详细探索 Redis 排序集。
+*   [Redis University's RU101](https://university.redis.com/courses/ru101/)详细探索 Redis 排序集。

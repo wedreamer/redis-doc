@@ -1,6 +1,10 @@
-***
-
-## 标题： “Redis Strings”&#xA;链接标题： “字符串”&#xA;体重： 10&#xA;描述： >&#xA;Redis 字符串简介
+---
+title: "Redis Strings"
+linkTitle: "Strings"
+weight: 10
+description: >
+    Introduction to Redis strings
+---
 
 Redis 字符串存储字节序列，包括文本、序列化对象和二进制数组。
 因此，字符串是最基本的 Redis 数据类型。
@@ -69,4 +73,4 @@ Redis 字符串存储字节序列，包括文本、序列化对象和二进制�
 ## 了解更多信息
 
 *   [Redis Strings Explained](https://www.youtube.com/watch?v=7CUt4yWeRQE)是一个关于Redis字符串的简短，全面的视频解释器。
-*   [雷迪斯大学的RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 字符串。
+*   [Redis University's RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 字符串。

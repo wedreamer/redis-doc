@@ -1,6 +1,13 @@
-***
-
-## 标题： “Redis Streams 教程”&#xA;链接标题：“流教程”&#xA;体重： 61&#xA;描述： >&#xA;有关 Redis 流的综合教程&#xA;别名：&#xA;\- /主题/流介绍&#xA;\- /docs/manual/data-types/streams
+---
+title: "Redis Streams tutorial"
+linkTitle: "Streams tutorial"
+weight: 61
+description: >
+    A comprehensive tutorial on Redis streams
+aliases:
+    - /topics/streams-intro
+    - /docs/manual/data-types/streams
+---
 
 如果您不熟悉直播，请参阅[Redis Streams 介绍](/docs/data-types/streams/).有关更全面的教程，请继续阅读。
 
@@ -10,7 +17,7 @@ Redis 流数据类型是在 Redis 5.0 中引入的。流对日志数据结构进
 
 ## 流基础知识
 
-流是仅追加数据结构。基本写入命令，称为[断续器](/commands/xadd)，将新条目追加到指定的流。
+流是仅追加数据结构。基本写入命令，称为[XADD](/commands/xadd)，将新条目追加到指定的流。
 
 每个流条目由一个或多个字段值对组成，有点像记录或 Redis 哈希：
 

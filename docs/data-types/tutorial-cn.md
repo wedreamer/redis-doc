@@ -1,6 +1,12 @@
-***
-
-## 标题： “Redis 数据类型教程”&#xA;链接标题： “教程”&#xA;描述： 学习基本的 Redis 数据类型以及如何使用它们&#xA;体重： 1&#xA;别名：&#xA;\- /主题/数据类型介绍&#xA;\- /docs/manual/data-types/data-types-tutorial
+---
+title: "Redis data types tutorial"
+linkTitle: "Tutorial"
+description: Learning the basic Redis data types and how to use them
+weight: 1
+aliases:
+    - /topics/data-types-intro
+    - /docs/manual/data-types/data-types-tutorial
+---
 
 下面是一个实践教程，介绍如何使用 Redis CLI 的核心 Redis 数据类型。有关数据类型的一般概述，请参阅[数据类型介绍](/docs/data-types/).
 

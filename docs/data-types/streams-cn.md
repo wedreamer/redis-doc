@@ -1,6 +1,10 @@
-***
-
-## 标题： “Redis Streams”&#xA;链接标题： “流”&#xA;体重： 60&#xA;描述： >&#xA;Redis 流简介
+---
+title: "Redis Streams"
+linkTitle: "Streams"
+weight: 60
+description: >
+    Introduction to Redis streams
+---
 
 Redis 流是一种数据结构，其作用类似于仅追加日志。
 您可以使用流实时记录和同时联合事件。
@@ -77,5 +81,5 @@ Redis 流支持多种修剪策略（以防止流无限增长）和多个使用�
 ## 了解更多信息
 
 *   这[Redis Streams Tutorial](/docs/data-types/streams-tutorial)用许多例子解释了Redis流。
-*   [Redis Streams 解释](https://www.youtube.com/watch?v=Z8qcpXyMAiA)是对Redis中流的有趣介绍。
-*   [雷迪斯大学的RU102](https://university.redis.com/courses/ru102/)是一个专门针对 Redis 流的免费在线课程。
+*   [Redis Streams Explained](https://www.youtube.com/watch?v=Z8qcpXyMAiA)是对Redis中流的有趣介绍。
+*   [Redis University's RU102](https://university.redis.com/courses/ru102/)是一个专门针对 Redis 流的免费在线课程。
