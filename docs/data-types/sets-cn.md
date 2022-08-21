@@ -1,6 +1,10 @@
-***
-
-## 标题： “Redis sets”&#xA;链接标题： “集”&#xA;体重： 30&#xA;描述： >&#xA;Redis 集简介
+---
+title: "Redis sets"
+linkTitle: "Sets"
+weight: 30
+description: >
+    Introduction to Redis sets
+---
 
 Redis 集是唯一字符串（成员）的无序集合。
 您可以使用 Redis 集有效地：
@@ -63,11 +67,10 @@ Redis 集的最大大小为 2^32 - 1 （4，294，967，295） 个成员。
 
 ## 性能
 
-大多数集合操作（包括添加、删除和检查项目是否为集合成员）都是 O（1）。
-这意味着它们非常高效。
-但是，对于具有数十万或更多成员的大型集合，在运行`SMEMBERS`命令。
+大多数集合操作（包括添加、删除和检查项目是否为集合成员）都是 O（1）, 这意味着它们非常高效。
+但是，对于具有数十万或更多成员的大型集合，在运行 `SMEMBERS` 命令。
 此命令为 O（n），并在单个响应中返回整个集合。
-作为替代方案，请考虑`SSCAN`，允许您以迭代方式检索集合的所有成员。
+作为替代方案，请考虑 `SSCAN`，允许您以迭代方式检索集合的所有成员。
 
 ## 选择
 
@@ -80,4 +83,4 @@ Redis 集经常被用作一种索引。
 ## 了解更多信息
 
 *   [Redis 集说明](https://www.youtube.com/watch?v=PKdCppSNTGQ)和[Redis 套装精心设计](https://www.youtube.com/watch?v=aRw5ME\_5kMY)是两个简短但全面的视频解释器，涵盖了Redis集。
-*   [雷迪斯大学的RU101](https://university.redis.com/courses/ru101/)详细探索 Redis 集。
+*   [Redis University's RU101](https://university.redis.com/courses/ru101/)详细探索 Redis 集。

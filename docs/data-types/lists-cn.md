@@ -1,6 +1,11 @@
-***
+---
+title: "Redis lists"
+linkTitle: "Lists"
+weight: 20
+description: >
+    Introduction to Redis lists
+---
 
-## 标题： “Redis 列表”&#xA;链接标题： “列表”&#xA;体重： 20&#xA;描述： >&#xA;Redis 列表简介
 
 Redis 列表是字符串值的链接列表。
 Redis 列表通常用于：
@@ -104,9 +109,9 @@ Redis 列表的最大长度为 2^32 - 1 （4，294，967，295） 个元素。
 
 ## 选择
 
-考虑[Redis 流](/docs/data-types/streams)作为列表的替代方法，当您需要存储和处理一系列不确定的事件时。
+当您需要存储和处理一系列不确定的事件时, 考虑[Redis 流](/docs/data-types/streams)作为列表的替代方法。
 
 ## 了解更多信息
 
 *   [Redis 列表说明](https://www.youtube.com/watch?v=PB5SeOkkxQc)是 Redis 列表上的一个简短、全面的视频解释器。
-*   [雷迪斯大学的RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 列表。
+*   [Redis University's RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 列表。
