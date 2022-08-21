@@ -1,6 +1,10 @@
-***
-
-## 标题： “Redis HyperLogLog”&#xA;链接标题： “HyperLogLog”&#xA;体重： 90&#xA;描述： >&#xA;Redis HyperLogLog 数据类型简介
+---
+title: "Redis HyperLogLog"
+linkTitle: "HyperLogLog"
+weight: 90
+description: >
+    Introduction to the Redis HyperLogLog data type
+---
 
 HyperLogLog 是一种数据结构，用于估计集合的基数。作为概率数据结构，HyperLogLog 以完美的精度换取高效的空间利用率。
 
@@ -37,7 +41,7 @@ Redis HyperLogLog 实现最多使用 12 KB，并提供 0.81% 的标准误差。
 ## 性能
 
 写作（`PFADD`） 到 并读取 （`PFCOUNT`）的HyperLogLog是在恒定的时间和空间中完成的。
-合并 HLL 为 O（n），其中*n*是草图的数量。
+合并 HLL 为 O（n），其中 *n* 是草图的数量。
 
 ## 限制
 
