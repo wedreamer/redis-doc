@@ -8,8 +8,7 @@ aliases:
     - /topics/notifications
 ---
 
-Keyspace notifications allow clients to subscribe to Pub/Sub channels in order
-to receive events affecting the Redis data set in some way.
+Keyspace notifications allow clients to subscribe to Pub/Sub channels in order to receive events affecting the Redis data set in some way.
 
 Examples of events that can be received are:
 
@@ -17,48 +16,32 @@ Examples of events that can be received are:
 * All the keys receiving an LPUSH operation.
 * All the keys expiring in the database 0.
 
-Note: Redis Pub/Sub is *fire and forget* that is, if your Pub/Sub client disconnects,
-and reconnects later, all the events delivered during the time the client was
-disconnected are lost.
+Note: Redis Pub/Sub is *fire and forget* that is, if your Pub/Sub client disconnects, and reconnects later, all the events delivered during the time the client was disconnected are lost.
 
 ### Type of events
 
-Keyspace notifications are implemented by sending two distinct types of events
-for every operation affecting the Redis data space. For instance a `DEL`
-operation targeting the key named `mykey` in database `0` will trigger
-the delivering of two messages, exactly equivalent to the following two
-`PUBLISH` commands:
+Keyspace notifications are implemented by sending two distinct types of events for every operation affecting the Redis data space. For instance a `DEL` operation targeting the key named `mykey` in database `0` will trigger the delivering of two messages, exactly equivalent to the following two `PUBLISH` commands:
 
     PUBLISH __keyspace@0__:mykey del
     PUBLISH __keyevent@0__:del mykey
 
-The first channel listens to all the events targeting
-the key `mykey` and the other channel listens only to `del` operation
-events on the key `mykey`
+The first channel listens to all the events targeting the key `mykey` and the other channel listens only to `del` operation events on the key `mykey`
 
-The first kind of event, with `keyspace` prefix in the channel is called
-a **Key-space notification**, while the second, with the `keyevent` prefix,
-is called a **Key-event notification**.
+The first kind of event, with `keyspace` prefix in the channel is called a **Key-space notification**, while the second, with the `keyevent` prefix, is called a **Key-event notification**.
 
-In the previous example a `del` event was generated for the key `mykey` resulting
-in two messages:
+In the previous example a `del` event was generated for the key `mykey` resulting in two messages:
 
 * The Key-space channel receives as message the name of the event.
 * The Key-event channel receives as message the name of the key.
 
-It is possible to enable only one kind of notification in order to deliver
-just the subset of events we are interested in.
+It is possible to enable only one kind of notification in order to deliver just the subset of events we are interested in.
 
 ### Configuration
 
-By default keyspace event notifications are disabled because while not
-very sensible the feature uses some CPU power. Notifications are enabled
-using the `notify-keyspace-events` of redis.conf or via the **CONFIG SET**.
+By default keyspace event notifications are disabled because while not very sensible the feature uses some CPU power. Notifications are enabled using the `notify-keyspace-events` of redis.conf or via the **CONFIG SET**.
 
 Setting the parameter to the empty string disables notifications.
-In order to enable the feature a non-empty string is used, composed of multiple
-characters, where every character has a special meaning according to the
-following table:
+In order to enable the feature a non-empty string is used, composed of multiple characters, where every character has a special meaning according to the following table:
 
     K     Keyspace events, published with __keyspace@<db>__ prefix.
     E     Keyevent events, published with __keyevent@<db>__ prefix.
@@ -76,11 +59,9 @@ following table:
     n     New key events (Note: not included in the 'A' class)
     A     Alias for "g$lshztxed", so that the "AKE" string means all the events except "m".
 
-At least `K` or `E` should be present in the string, otherwise no event
-will be delivered regardless of the rest of the string.
+At least `K` or `E` should be present in the string, otherwise no event will be delivered regardless of the rest of the string.
 
-For instance to enable just Key-space events for lists, the configuration
-parameter must be set to `Kl`, and so forth.
+For instance to enable just Key-space events for lists, the configuration parameter must be set to `Kl`, and so forth.
 
 You can use the string `KEA` to enable most types of events.
 
@@ -143,16 +124,14 @@ Different commands generate different kind of events according to the following 
 
 **IMPORTANT** all the commands generate events only if the target key is really modified. For instance an `SREM` deleting a non-existing element from a Set will not actually change the value of the key, so no event will be generated.
 
-If in doubt about how events are generated for a given command, the simplest
-thing to do is to watch yourself:
+If in doubt about how events are generated for a given command, the simplest thing to do is to watch yourself:
 
     $ redis-cli config set notify-keyspace-events KEA
     $ redis-cli --csv psubscribe '__key*__:*'
     Reading messages... (press Ctrl-C to quit)
     "psubscribe","__key*__:*",1
 
-At this point use `redis-cli` in another terminal to send commands to the
-Redis server and watch the events generated:
+At this point use `redis-cli` in another terminal to send commands to the Redis server and watch the events generated:
 
     "pmessage","__key*__:*","__keyspace@0__:foo","set"
     "pmessage","__key*__:*","__keyevent@0__:set","foo"

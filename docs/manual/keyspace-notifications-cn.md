@@ -8,7 +8,7 @@ aliases:
     - /topics/notifications
 ---
 
-键空间通知允许客户端按顺序订阅发布/订阅通道以某种方式接收影响 Redis 数据集的事件。
+Keyspace 通知允许客户端订阅 Pub/Sub 频道，以便接收以某种方式影响 Redis 数据集的事件。
 
 可以接收的事件示例包括：
 
@@ -16,11 +16,11 @@ aliases:
 *   接收 LPUSH 操作的所有密钥。
 *   数据库中所有即将过期的密钥 0.
 
-注意：Redis Pub/Sub 是*火与忘*也就是说，如果您的发布/订阅客户端断开连接，并在以后重新连接，在客户端期间传递的所有事件断开连接将丢失。
+注意：Redis Pub/Sub 是*fire and forget*，也就是说，如果您的 Pub/Sub 客户端断开连接并稍后重新连接，则在客户端断开连接期间传递的所有事件都将丢失。
 
 ### 事件类型
 
-键空间通知是通过发送两种不同类型的事件来实现的对于影响 Redis 数据空间的每个操作。例如`DEL`以名为`mykey`在数据库中`0`将触发传递两条消息，完全等效于以下两条消息`PUBLISH`命令：
+Keyspace 通知是通过为影响 Redis 数据空间的每个操作发送两种不同类型的事件来实现的。例如，针对数据库 "0" 中名为 "mykey" 的键的 "DEL" 操作将触发两条消息的传递，完全等同于以下两个 "PUBLISH" 命令：
 
     PUBLISH __keyspace@0__:mykey del
     PUBLISH __keyevent@0__:del mykey
