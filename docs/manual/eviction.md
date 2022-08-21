@@ -43,8 +43,7 @@ specified limit every time new data is added.
 
 ## Eviction policies
 
-The exact behavior Redis follows when the `maxmemory` limit is reached is
-configured using the `maxmemory-policy` configuration directive.
+The exact behavior Redis follows when the `maxmemory` limit is reached is configured using the `maxmemory-policy` configuration directive.
 
 The following policies are available:
 
@@ -90,24 +89,15 @@ If a command results in a lot of memory being used (like a big set intersection 
 
 ## Approximated LRU algorithm
 
-Redis LRU algorithm is not an exact implementation. This means that Redis is
-not able to pick the *best candidate* for eviction, that is, the access that
-was accessed the furthest in the past. Instead it will try to run an approximation
-of the LRU algorithm, by sampling a small number of keys, and evicting the
-one that is the best (with the oldest access time) among the sampled keys.
+Redis LRU algorithm is not an exact implementation. This means that Redis is not able to pick the *best candidate* for eviction, that is, the access that was accessed the furthest in the past. Instead it will try to run an approximation of the LRU algorithm, by sampling a small number of keys, and evicting the one that is the best (with the oldest access time) among the sampled keys.
 
-However, since Redis 3.0 the algorithm was improved to also take a pool of good
-candidates for eviction. This improved the performance of the algorithm, making
-it able to approximate more closely the behavior of a real LRU algorithm.
+However, since Redis 3.0 the algorithm was improved to also take a pool of good candidates for eviction. This improved the performance of the algorithm, making it able to approximate more closely the behavior of a real LRU algorithm.
 
 What is important about the Redis LRU algorithm is that you **are able to tune** the precision of the algorithm by changing the number of samples to check for every eviction. This parameter is controlled by the following configuration directive:
 
     maxmemory-samples 5
 
-The reason Redis does not use a true LRU implementation is because it
-costs more memory. However, the approximation is virtually equivalent for an
-application using Redis. This figure compares
-the LRU approximation used by Redis with true LRU.
+The reason Redis does not use a true LRU implementation is because it costs more memory. However, the approximation is virtually equivalent for an application using Redis. This figure compares the LRU approximation used by Redis with true LRU.
 
 ![LRU comparison](../../images/lru_comparison.png)
 
@@ -123,25 +113,17 @@ In a theoretical LRU implementation we expect that, among the old keys, the firs
 
 As you can see Redis 3.0 does a better job with 5 samples compared to Redis 2.8, however most objects that are among the latest accessed are still retained by Redis 2.8. Using a sample size of 10 in Redis 3.0 the approximation is very close to the theoretical performance of Redis 3.0.
 
-Note that LRU is just a model to predict how likely a given key will be accessed in the future. Moreover, if your data access pattern closely
-resembles the power law, most of the accesses will be in the set of keys
-the LRU approximated algorithm can handle well.
+Note that LRU is just a model to predict how likely a given key will be accessed in the future. Moreover, if your data access pattern closely resembles the power law, most of the accesses will be in the set of keys the LRU approximated algorithm can handle well.
 
 In simulations we found that using a power law access pattern, the difference between true LRU and Redis approximation were minimal or non-existent.
 
-However you can raise the sample size to 10 at the cost of some additional CPU
-usage to closely approximate true LRU, and check if this makes a
-difference in your cache misses rate.
+However you can raise the sample size to 10 at the cost of some additional CPU usage to closely approximate true LRU, and check if this makes a difference in your cache misses rate.
 
-To experiment in production with different values for the sample size by using
-the `CONFIG SET maxmemory-samples <count>` command, is very simple.
+To experiment in production with different values for the sample size by using the `CONFIG SET maxmemory-samples <count>` command, is very simple.
 
 ## The new LFU mode
 
-Starting with Redis 4.0, the [Least Frequently Used eviction mode](http://antirez.com/news/109) is available. This mode may work better (provide a better
-hits/misses ratio) in certain cases. In LFU mode, Redis will try to track
-the frequency of access of items, so the ones used rarely are evicted. This means
-the keys used often have a higher chance of remaining in memory.
+Starting with Redis 4.0, the [Least Frequently Used eviction mode](http://antirez.com/news/109) is available. This mode may work better (provide a better hits/misses ratio) in certain cases. In LFU mode, Redis will try to track the frequency of access of items, so the ones used rarely are evicted. This means the keys used often have a higher chance of remaining in memory.
 
 To configure the LFU mode, the following policies are available:
 
@@ -152,8 +134,7 @@ LFU is approximated like LRU: it uses a probabilistic counter, called a [Morris 
 
 That information is sampled similarly to what happens for LRU (as explained in the previous section of this documentation) to select a candidate for eviction.
 
-However unlike LRU, LFU has certain tunable parameters: for example, how fast
-should a frequent item lower in rank if it gets no longer accessed? It is also possible to tune the Morris counters range to better adapt the algorithm to specific use cases.
+However unlike LRU, LFU has certain tunable parameters: for example, how fast should a frequent item lower in rank if it gets no longer accessed? It is also possible to tune the Morris counters range to better adapt the algorithm to specific use cases.
 
 By default Redis is configured to:
 
