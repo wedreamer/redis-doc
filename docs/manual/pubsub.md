@@ -8,17 +8,7 @@ aliases:
   - /docs/manual/pub-sub
 ---
 
-`SUBSCRIBE`, `UNSUBSCRIBE` and `PUBLISH`
-implement the [Publish/Subscribe messaging
-paradigm](http://en.wikipedia.org/wiki/Publish/subscribe) where
-(citing Wikipedia) senders (publishers) are not programmed to send
-their messages to specific receivers (subscribers). Rather, published
-messages are characterized into channels, without knowledge of what (if
-any) subscribers there may be. Subscribers express interest in one or
-more channels, and only receive messages that are of interest, without
-knowledge of what (if any) publishers there are. This decoupling of
-publishers and subscribers can allow for greater scalability and a more
-dynamic network topology.
+`SUBSCRIBE`, `UNSUBSCRIBE` and `PUBLISH` implement the [Publish/Subscribe messaging paradigm](http://en.wikipedia.org/wiki/Publish/subscribe) where (citing Wikipedia) senders (publishers) are not programmed to send their messages to specific receivers (subscribers). Rather, published messages are characterized into channels, without knowledge of what (if any) subscribers there may be. Subscribers express interest in one or more channels, and only receive messages that are of interest, without knowledge of what (if any) publishers there are. This decoupling of publishers and subscribers can allow for greater scalability and a more dynamic network topology.
 
 For instance in order to subscribe to channels `foo` and `bar` the
 client issues a `SUBSCRIBE` providing the names of the channels:
@@ -168,10 +158,7 @@ of type `psubscribe` and `punsubscribe` using the same format as the
 
 ## Messages matching both a pattern and a channel subscription
 
-A client may receive a single message multiple times if it's subscribed
-to multiple patterns matching a published message, or if it is
-subscribed to both patterns and channels matching the message. Like in
-the following example:
+A client may receive a single message multiple times if it's subscribed to multiple patterns matching a published message, or if it is subscribed to both patterns and channels matching the message. Like in the following example:
 
 ```
 SUBSCRIBE foo
@@ -184,12 +171,7 @@ will receive two messages: one of type `message` and one of type
 
 ## The meaning of the subscription count with pattern matching
 
-In `subscribe`, `unsubscribe`, `psubscribe` and `punsubscribe`
-message types, the last argument is the count of subscriptions still
-active. This number is actually the total number of channels and
-patterns the client is still subscribed to. So the client will exit
-the Pub/Sub state only when this count drops to zero as a result of
-unsubscribing from all the channels and patterns.
+In `subscribe`, `unsubscribe`, `psubscribe` and `punsubscribe` message types, the last argument is the count of subscriptions still active. This number is actually the total number of channels and patterns the client is still subscribed to. So the client will exit the Pub/Sub state only when this count drops to zero as a result of unsubscribing from all the channels and patterns.
 
 ## Sharded Pub/Sub
 
@@ -212,11 +194,6 @@ chat](https://gist.github.com/pietern/348262).
 
 ## Client library implementation hints
 
-Because all the messages received contain the original subscription
-causing the message delivery (the channel in the case of message type,
-and the original pattern in the case of pmessage type) client libraries
-may bind the original subscription to callbacks (that can be anonymous
-functions, blocks, function pointers), using a hash table.
+Because all the messages received contain the original subscription causing the message delivery (the channel in the case of message type, and the original pattern in the case of pmessage type) client libraries may bind the original subscription to callbacks (that can be anonymous functions, blocks, function pointers), using a hash table.
 
-When a message is received an O(1) lookup can be done in order to
-deliver the message to the registered callback.
+When a message is received an O(1) lookup can be done in order to deliver the message to the registered callback.
