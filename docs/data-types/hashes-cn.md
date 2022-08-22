@@ -60,16 +60,16 @@ Redis 哈希是结构化为字段值对集合的记录类型。
 
 ## 性能
 
-大多数 Redis 哈希命令都是 O（1）。
+大多数 Redis 哈希命令都是 O (1) 。
 
-一些命令 - 例如`HKEYS`,`HVALS`和`HGETALL`- 是 O（n），其中*n*是字段值对的数量。
+一些命令 - 例如`HKEYS`,`HVALS`和`HGETALL`- 是 O (n) , 其中*n*是字段值对的数量。
 
 ## 限制
 
-每个哈希最多可以存储 4，294，967，295 （2^32 - 1） 个字段值对。
-实际上，哈希仅受托管 Redis 部署的 VM 上的总体内存的限制。
+每个哈希最多可以存储 4, 294, 967, 295  (2^32 - 1)  个字段值对。
+实际上, 哈希仅受托管 Redis 部署的 VM 上的总体内存的限制。
 
 ## 了解更多信息
 
-*   [Redis Hashes Explained](https://www.youtube.com/watch?v=-KdITaRkQ-U)是一个简短，全面的视频解释器，涵盖了 Redis 哈希。
+*   [Redis Hashes Explained](https://www.youtube.com/watch?v=-KdITaRkQ-U)是一个简短, 全面的视频解释器, 涵盖了 Redis 哈希。
 *   [Redis University's RU101](https://university.redis.com/courses/ru101/)详细介绍了 Redis 哈希。

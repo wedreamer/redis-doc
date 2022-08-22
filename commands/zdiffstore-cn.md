@@ -4,11 +4,11 @@
 
 不存在的键被视为空集。
 
-如果`destination`已经存在，它被覆盖了。
+如果`destination`已经存在, 它被覆盖了。
 
 @return
 
-@integer回复：生成的排序集中的元素数，位于
+@integer回复：生成的排序集中的元素数, 位于
 `destination`.
 
 @examples

@@ -3,7 +3,7 @@
 
 [tt]: /topics/transactions
 
-如果`WATCH`被使用，`DISCARD`取消监视连接监视的所有键。
+如果`WATCH`被使用, `DISCARD`取消监视连接监视的所有键。
 
 @return
 

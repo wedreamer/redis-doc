@@ -1,12 +1,12 @@
-此命令类似于`ZUNIONSTORE`，而不是存储结果
-排序集，它将返回到客户端。
+此命令类似于`ZUNIONSTORE`, 而不是存储结果
+排序集, 它将返回到客户端。
 
-有关`WEIGHTS`和`AGGREGATE`选项，请参阅`ZUNIONSTORE`.
+有关`WEIGHTS`和`AGGREGATE`选项, 请参阅`ZUNIONSTORE`.
 
 @return
 
-@array回复：并集的结果（如果
-这`WITHSCORES`给出了选项）。
+@array回复：并集的结果 (如果
+这`WITHSCORES`给出了选项) 。
 
 @examples
 

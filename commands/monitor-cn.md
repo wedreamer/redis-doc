@@ -1,4 +1,4 @@
-`MONITOR`是一个调试命令，它流回由 处理的每个命令
+`MONITOR`是一个调试命令, 它流回由 处理的每个命令
 Redis 服务器。
 它可以帮助了解数据库发生的情况。
 此命令可以通过以下方式使用`redis-cli`和通过`telnet`.
@@ -16,7 +16,7 @@ Redis 服务器。
     1339518100.363799 [0 lua] "set" "x" "7"
     1339518100.544926 [0 127.0.0.1:60866] "del" "x"
 
-用`SIGINT`（Ctrl-C） 停止`MONITOR`流运行方式`redis-cli`.
+用`SIGINT` (Ctrl-C)  停止`MONITOR`流运行方式`redis-cli`.
 
     $ telnet localhost 6379
     Trying 127.0.0.1...
@@ -39,15 +39,15 @@ Redis 服务器。
 
 ## 监视器未记录的命令
 
-出于安全考虑，不会记录任何管理命令
+出于安全考虑, 不会记录任何管理命令
 由`MONITOR`的输出和敏感数据在命令中进行编辑`AUTH`.
 
-此外，命令`QUIT`也不会被记录。
+此外, 命令`QUIT`也不会被记录。
 
 ## 运行监视器的成本
 
-因为`MONITOR`流回**都**命令，它的使用是有代价的。
-以下（完全不科学的）基准数据说明了成本
+因为`MONITOR`流回**都**命令, 它的使用是有代价的。
+以下 (完全不科学) ) 基准数据说明了成本
 的运行`MONITOR`可以。
 
 基准测试结果**没有** `MONITOR`运行：
@@ -59,7 +59,7 @@ Redis 服务器。
     GET: 104275.29 requests per second
     INCR: 93283.58 requests per second
 
-基准测试结果**跟** `MONITOR`运行 （`redis-cli monitor > /dev/null`):
+基准测试结果**跟** `MONITOR`运行  (`redis-cli monitor > /dev/null`):
 
     $ src/redis-benchmark -c 10 -n 100000 -q
     PING_INLINE: 58479.53 requests per second
@@ -68,13 +68,13 @@ Redis 服务器。
     GET: 45330.91 requests per second
     INCR: 41771.09 requests per second
 
-在这种特殊情况下，运行单个`MONITOR`客户端可以减少
+在这种特殊情况下, 运行单个`MONITOR`客户端可以减少
 吞吐量超过 50%。
 跑得更多`MONITOR`客户端将进一步降低吞吐量。
 
 @return
 
-**非标准返回值**，只是将收到的命令转储到无限
+**非标准返回值**, 只是将收到的命令转储到无限
 流。
 
 ## 行为更改历史记录

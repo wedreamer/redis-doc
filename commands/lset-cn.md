@@ -1,7 +1,7 @@
 将列表元素设置为`index`自`element`.
-有关`index`参数，请参阅`LINDEX`.
+有关`index`参数, 请参阅`LINDEX`.
 
-对于超出范围的索引，将返回错误。
+对于超出范围的索引, 将返回错误。
 
 @return
 

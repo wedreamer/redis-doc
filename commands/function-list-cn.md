@@ -12,9 +12,9 @@
     *   **名字：**函数的名称。
     *   **描述：**函数的描述。
     *   **标志：**数组[函数标志](/docs/manual/programmability/functions-intro/#function-flags).
-*   **library_code：**库的源代码（当给定`WITHCODE`修饰符）。
+*   **library_code：**库的源代码 (当给定`WITHCODE`修饰符) 。
 
-欲了解更多信息，请参阅[Redis 函数简介](/topics/functions-intro).
+欲了解更多信息, 请参阅[Redis 函数简介](/topics/functions-intro).
 
 @return
 

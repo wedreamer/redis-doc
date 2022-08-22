@@ -1,10 +1,10 @@
-此命令类似于`ZDIFFSTORE`，而不是存储结果
-排序集，它将返回到客户端。
+此命令类似于`ZDIFFSTORE`, 而不是存储结果
+排序集, 它将返回到客户端。
 
 @return
 
-@array回复：差异的结果（如果
-这`WITHSCORES`给出了选项）。
+@array回复：差异的结果 (如果
+这`WITHSCORES`给出了选项) 。
 
 @examples
 

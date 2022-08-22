@@ -1,9 +1,9 @@
 删除库及其所有函数。
 
 此命令将删除名为*库名称*以及其中的所有功能。
-如果库不存在，服务器将返回错误。
+如果库不存在, 服务器将返回错误。
 
-欲了解更多信息，请参阅[Redis 函数简介](/topics/functions-intro).
+欲了解更多信息, 请参阅[Redis 函数简介](/topics/functions-intro).
 
 @return
 

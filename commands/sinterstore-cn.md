@@ -1,7 +1,7 @@
-此命令等于`SINTER`，但不是返回结果集，
+此命令等于`SINTER`, 但不是返回结果集, 
 它存储在`destination`.
 
-如果`destination`已经存在，它被覆盖了。
+如果`destination`已经存在, 它被覆盖了。
 
 @return
 

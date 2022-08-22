@@ -1,5 +1,5 @@
 
-**注意：本文档由 Redis 的创建者 Salvatore Sanfilippo 在 Redis 开发早期（约 2010 年）编写，并不一定反映最新的 Redis 实现。**
+**注意：本文档由 Redis 的创建者 Salvatore Sanfilippo 在 Redis 开发早期 (约 2010 年) 编写, 并不一定反映最新的 Redis 实现。**
 
 ## 为什么需要事件库？
 
@@ -8,20 +8,20 @@
 问：您期望网络服务器始终处于什么状态？<br/>
 答：监视其侦听端口上的入站连接并接受它们。
 
-问：调用 \[接受]（http://man.cx/accept%282%29 接受）会产生一个描述符。我该怎么办？<br/>
+问：调用 \[接受] (http://man.cx/accept%282%29 接受) 会产生一个描述符。我该怎么办？<br/>
 答：保存描述符并对其执行非阻塞读/写操作。
 
 问：为什么读/写必须是非阻塞的？<br/>
-答：如果文件操作（甚至 Unix 中的套接字也是文件）被阻塞，例如，当服务器在文件 I/O 操作中被阻塞时，服务器如何接受其他连接请求。
+答：如果文件操作 (甚至 Unix 中的套接字也是文件) 被阻, , 例, , 当服务器在文件 I/O 操作中被阻塞, , 服务器如何接受其他连接请求。
 
-问：我想我必须在套接字上做很多这样的非阻塞操作，看看它什么时候准备好了。我说的对吗？<br/>
+问：我想我必须在套接字上做很多这样的非阻塞操作, 看看它什么时候准备好了。我说的对吗？<br/>
 答：是的。这就是事件库为您所做的。现在你明白了。
 
 问：事件库如何执行它们所做的事情？<br/>
 答：它们使用操作系统的轮询工具以及计时器。
 
 问：那么是否有任何开源事件库可以执行您刚才描述的内容？<br/>
-答：是的。`libevent`和`libev`是两个这样的事件库，我可以从头顶上回忆起。
+答：是的。`libevent`和`libev`是两个这样的事件库, 我可以从头顶上回忆起。
 
 问：Redis 是否使用此类开源事件库来处理套接字 I/O？<br/>
 答：不可以。对于各种[原因](http://groups.google.com/group/redis-db/browse_thread/thread/b52814e9ef15b8d0/)Redis使用自己的事件库。
@@ -74,18 +74,18 @@ Redis 实现了自己的事件库。事件库在`ae.c`.
 
     aeCreateTimeEvent(server.el /*eventLoop*/, 1 /*milliseconds*/, serverCron /*proc*/, NULL /*clientData*/, NULL /*finalizerProc*/);
 
-`redis.c:serverCron`执行许多操作，帮助保持 Redis 正常运行。
+`redis.c:serverCron`执行许多操作, 帮助保持 Redis 正常运行。
 
 ## `aeCreateFileEvent`
 
-本质`aeCreateFileEvent`函数是执行[`epoll_ctl`](http://man.cx/epoll_ctl)系统调用，其中添加了监视`EPOLLIN`事件*侦听描述符*创建者`anetTcpServer`并将其与`epoll`由调用`aeCreateEventLoop`.
+本质`aeCreateFileEvent`函数是执行[`epoll_ctl`](http://man.cx/epoll_ctl)系统调用, 其中添加了监视`EPOLLIN`事件*侦听描述符*创建者`anetTcpServer`并将其与`epoll`由调用`aeCreateEventLoop`.
 
 以下是对确切内容的解释`aeCreateFileEvent`从 调用时执行`redis.c:initServer`.
 
 `initServer`将以下参数传递给`aeCreateFileEvent`:
 
 *   `server.el`：事件循环由`aeCreateEventLoop`.这`epoll`描述符来自`server.el`.
-*   `server.fd`：*侦听描述符*还用作从`eventLoop->events`表并存储额外的信息，如回调函数。
+*   `server.fd`：*侦听描述符*还用作从`eventLoop->events`表并存储额外的信息, 如回调函数。
 *   `AE_READABLE`：表示`server.fd`必须注意`EPOLLIN`事件。
 *   `acceptHandler`：在被监视的事件准备就绪时必须执行的函数。此函数指针存储在`eventLoop->events[server.fd]->rfileProc`.
 
@@ -99,9 +99,9 @@ Redis 实现了自己的事件库。事件库在`ae.c`.
 
 ## `aeProcessEvents`
 
-`ae.c:aeProcessEvents`通过调用查找将在最短时间内挂起的时间事件`ae.c:aeSearchNearestTimer`在事件循环上。在我们的例子中，事件循环中只有一个计时器事件是由`ae.c:aeCreateTimeEvent`.
+`ae.c:aeProcessEvents`通过调用查找将在最短时间内挂起的时间事件`ae.c:aeSearchNearestTimer`在事件循环上。在我们的例子中, 事件循环中只有一个计时器事件是由`ae.c:aeCreateTimeEvent`.
 
-请记住，计时器事件由`aeCreateTimeEvent`现在可能已经过去了，因为它的到期时间为一毫秒。由于计时器已过期，则`tvp` `timeval`结构变量初始化为零。
+请记住, 计时器事件由`aeCreateTimeEvent`现在可能已经过去了, 因为它的到期时间为一毫秒。由于计时器已过期, 则`tvp` `timeval`结构变量初始化为零。
 
 这`tvp`结构变量以及事件循环变量被传递给`ae_epoll.c:aeApiPoll`.
 
@@ -110,7 +110,7 @@ Redis 实现了自己的事件库。事件库在`ae.c`.
 *   `fd`：现在已准备好根据掩码值执行读/写操作的描述符。
 *   `mask`：现在可以对相应的描述符执行的读/写事件。
 
-`aeApiPoll`返回准备操作的此类文件事件的数目。现在将事情放在上下文中，如果任何客户端请求连接，那么`aeApiPoll`会注意到它并填充`eventLoop->fired`表，其中描述符的条目为*侦听描述符*和面具`AE_READABLE`.
+`aeApiPoll`返回准备操作的此类文件事件的数目。现在将事情放在上下文中, 如果任何客户端请求连接, 那么`aeApiPoll`会注意到它并填充`eventLoop->fired`表, 其中描述符的条目为*侦听描述符*和面具`AE_READABLE`.
 
 现在`aeProcessEvents`调用`redis.c:acceptHandler`注册为回调。`acceptHandler`执行[接受](http://man.cx/accept)在*侦听描述符*返回*连接描述符*与客户端。`redis.c:createClient`在 上添加文件事件*连接描述符*通过调用`ae.c:aeCreateFileEvent`如下图所示：
 
@@ -128,6 +128,6 @@ Redis 实现了自己的事件库。事件库在`ae.c`.
 
 `ae.processTimeEvents`循环访问从 开始的时间事件列表`eventLoop->timeEventHead`.
 
-对于已过去的每个定时事件`processTimeEvents`调用已注册的回调。在这种情况下，它调用唯一注册的定时事件回调，即`redis.c:serverCron`.回调返回的时间（以毫秒为单位），在此时间之后必须再次调用回调。此更改通过调用`ae.c:aeAddMilliSeconds`并将在下一次迭代中处理`ae.c:aeMain`同时循环。
+对于已过去的每个定时事件`processTimeEvents`调用已注册的回调。在这种情况下, 它调用唯一注册的定时事件回调, 即`redis.c:serverCron`.回调返回的时间 (以毫秒为单位), , 在此时间之后必须再次调用回调。此更改通过调用`ae.c:aeAddMilliSeconds`并将在下一次迭代中处理`ae.c:aeMain`同时循环。
 
 就这样。

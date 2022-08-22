@@ -1,12 +1,12 @@
 这`CONFIG GET`命令用于读取
 正在运行 Redis 服务器。
-并非所有配置参数在 Redis 2.4 中都受支持，而 Redis 2.6 支持
+并非所有配置参数在 Redis 2.4 中都受支持, 而 Redis 2.6 支持
 可以使用此命令读取服务器的整个配置。
 
 用于在运行时更改配置的对称命令是`CONFIG
 SET`.
 
-`CONFIG GET`采用多个参数，这些参数是 glob 样式的模式。
+`CONFIG GET`采用多个参数, 这些参数是 glob 样式的模式。
 与任何模式匹配的任何配置参数都将报告为列表
 键值对。
 例：
@@ -33,7 +33,7 @@ SET`.
 
 [hgcarr22rc]: http://github.com/redis/redis/raw/unstable/redis.conf
 
-请注意，您应该查看与您所在的版本相关的 redis.conf 文件
+请注意, 您应该查看与您所在的版本相关的 redis.conf 文件
 使用 AS 配置选项可能会在版本之间更改。链接
 以上是最新的开发版本。
 

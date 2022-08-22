@@ -5,10 +5,10 @@
     SET mykey value
     EXPIRE mykey seconds
 
-`SETEX`是原子的，可以使用前两个命令复制
+`SETEX`是原子的, 可以使用前两个命令复制
 在`MULTI`/`EXEC`块。
-它是作为给定操作序列的更快替代方案提供的，
-因为当 Redis 用作缓存时，此操作非常常见。
+它是作为给定操作序列的更快替代方案提供的, 
+因为当 Redis 用作缓存时, 此操作非常常见。
 
 在以下情况下返回错误`seconds`无效。
 

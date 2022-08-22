@@ -2,7 +2,7 @@
 
 @return
 
-@integer回复：集合的基数（元素数），或`0`如果`key`
+@integer回复：集合的基数 (元素数) , 或`0`如果`key`
 不存在。
 
 @examples

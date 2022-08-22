@@ -19,24 +19,11 @@ This system works using three main mechanisms:
 2. When the link between the master and the replica breaks, for network issues or because a timeout is sensed in the master or the replica, the replica reconnects and attempts to proceed with a partial resynchronization: it means that it will try to just obtain the part of the stream of commands it missed during the disconnection.
 3. When a partial resynchronization is not possible, the replica will ask for a full resynchronization. This will involve a more complex process in which the master needs to create a snapshot of all its data, send it to the replica, and then continue sending the stream of commands as the dataset changes.
 
-Redis uses by default asynchronous replication, which being low latency and
-high performance, is the natural replication mode for the vast majority of Redis
-use cases. However, Redis replicas asynchronously acknowledge the amount of data
-they received periodically with the master. So the master does not wait every time
-for a command to be processed by the replicas, however it knows, if needed, what
-replica already processed what command. This allows having optional synchronous replication.
+Redis uses by default asynchronous replication, which being low latency and high performance, is the natural replication mode for the vast majority of Redis use cases. However, Redis replicas asynchronously acknowledge the amount of data they received periodically with the master. So the master does not wait every time for a command to be processed by the replicas, however it knows, if needed, what replica already processed what command. This allows having optional synchronous replication.
 
-Synchronous replication of certain data can be requested by the clients using
-the `WAIT` command. However `WAIT` is only able to ensure there are the
-specified number of acknowledged copies in the other Redis instances, it does not
-turn a set of Redis instances into a CP system with strong consistency: acknowledged
-writes can still be lost during a failover, depending on the exact configuration
-of the Redis persistence. However with `WAIT` the probability of losing a write
-after a failure event is greatly reduced to certain hard to trigger failure
-modes.
+Synchronous replication of certain data can be requested by the clients using the `WAIT` command. However `WAIT` is only able to ensure there are the specified number of acknowledged copies in the other Redis instances, it does not turn a set of Redis instances into a CP system with strong consistency: acknowledged writes can still be lost during a failover, depending on the exact configuration of the Redis persistence. However with `WAIT` the probability of losing a write after a failure event is greatly reduced to certain hard to trigger failure modes.
 
-You can check the Redis Sentinel or Redis Cluster documentation for more information
-about high availability and failover. The rest of this document mainly describes the basic characteristics of Redis basic replication.
+You can check the Redis Sentinel or Redis Cluster documentation for more information about high availability and failover. The rest of this document mainly describes the basic characteristics of Redis basic replication.
 
 ### Important facts about Redis replication
 
@@ -50,14 +37,9 @@ about high availability and failover. The rest of this document mainly describes
 
 ## Safety of replication when master has persistence turned off
 
-In setups where Redis replication is used, it is strongly advised to have
-persistence turned on in the master and in the replicas. When this is not possible,
-for example because of latency concerns due to very slow disks, instances should
-be configured to **avoid restarting automatically** after a reboot.
+In setups where Redis replication is used, it is strongly advised to have persistence turned on in the master and in the replicas. When this is not possible, for example because of latency concerns due to very slow disks, instances should be configured to **avoid restarting automatically** after a reboot.
 
-To better understand why masters with persistence turned off configured to
-auto restart are dangerous, check the following failure mode where data
-is wiped from the master and all its replicas:
+To better understand why masters with persistence turned off configured to auto restart are dangerous, check the following failure mode where data is wiped from the master and all its replicas:
 
 1. We have a setup with node A acting as master, with persistence turned down, and nodes B and C replicating from node A.
 2. Node A crashes, however it has some auto-restart system, that restarts the process. However since persistence is turned off, the node restarts with an empty data set.
@@ -179,8 +161,7 @@ This behavior is controlled by the `replica-read-only` option in the redis.conf 
 
 Read-only replicas will reject all write commands, so that it is not possible to write to a replica because of a mistake. This does not mean that the feature is intended to expose a replica instance to the internet or more generally to a network where untrusted clients exist, because administrative commands like `DEBUG` or `CONFIG` are still enabled. The [Security](/topics/security) page describes how to secure a Redis instance.
 
-You may wonder why it is possible to revert the read-only setting
-and have replica instances that can be targeted by write operations.
+You may wonder why it is possible to revert the read-only setting and have replica instances that can be targeted by write operations.
 The answer is that writable replicas exist only for historical reasons.
 Using writable replicas can result in inconsistency between the master and the replica, so it is not recommended to use writable replicas.
 To understand in which situations this can be a problem, we need to understand how replication works.

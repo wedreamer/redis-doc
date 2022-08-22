@@ -2,7 +2,7 @@
 
 @return
 
-@integer回复：哈希中的字段数，或`0`什么时候`key`不存在。
+@integer回复：哈希中的字段数, 或`0`什么时候`key`不存在。
 
 @examples
 

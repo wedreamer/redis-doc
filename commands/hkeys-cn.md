@@ -2,7 +2,7 @@
 
 @return
 
-@array回复：哈希中的字段列表，或当`key`做
+@array回复：哈希中的字段列表, 或当`key`做
 不存在。
 
 @examples
