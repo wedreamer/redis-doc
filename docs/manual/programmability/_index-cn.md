@@ -51,7 +51,7 @@ Eval 脚本提供了一种让 Redis 临时运行脚本的快速而直接的方�
 *   [Redis Functions](/topics/functions-intro)
 
 运行脚本或函数时, Redis 保证其原子执行。
-脚本的执行会在整个过程中阻止所有服务器活动, 类似于[交易](/topics/transactions).
+脚本的执行会在整个过程中阻止所有服务器活动, 类似于[事务](/topics/transactions).
 这些语义意味着脚本的所有效果要么尚未发生, 要么已经发生。
 已执行脚本的阻塞语义始终适用于所有连接的客户端。
 
@@ -82,7 +82,7 @@ Eval 脚本提供了一种让 Redis 临时运行脚本的快速而直接的方�
 只读脚本和只读脚本命令在 Redis 7.0 中引入
 
 *   在 Redis 7.0.1 之前`PUBLISH`,`SPUBLISH`和`PFCOUNT`不被视为脚本中的写入命令
-*   在 Redis 7.0.1 之前`no-writes` [旗](/topics/lua-api#script_flags)没有暗示`allow-oom`
+*   在 Redis 7.0.1 之前`no-writes` [flag](/topics/lua-api#script_flags)没有暗示`allow-oom`
 *   在 Redis 7.0.1 之前`no-writes`标志不允许脚本在写入暂停期间运行。
 
 推荐的方法是将标准脚本命令与`no-writes`标记, 除非您需要前面提到的功能之一。
