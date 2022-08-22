@@ -29,16 +29,16 @@ Redis 能够在没有配置文件的情况下使用内置的默认值启动配�
 
 配置指令列表及其含义和预期用法在自有文档的示例 redis.conf 中可用，该示例已装入Redis distribution.
 
-*   自我记录[redis.conf for Redis 7.0](https://raw.githubusercontent.com/redis/redis/7.0/redis.conf).
-*   自我记录[redis.conf for Redis 6.2](https://raw.githubusercontent.com/redis/redis/6.2/redis.conf).
-*   自我记录[redis.conf for Redis 6.0](https://raw.githubusercontent.com/redis/redis/6.0/redis.conf).
-*   自我记录[redis.conf for Redis 5.0](https://raw.githubusercontent.com/redis/redis/5.0/redis.conf).
-*   自我记录[redis.conf for Redis 4.0](https://raw.githubusercontent.com/redis/redis/4.0/redis.conf).
-*   自我记录[redis.conf for Redis 3.2](https://raw.githubusercontent.com/redis/redis/3.2/redis.conf).
-*   自我记录[redis.conf for Redis 3.0](https://raw.githubusercontent.com/redis/redis/3.0/redis.conf).
-*   自我记录[redis.conf for Redis 2.8](https://raw.githubusercontent.com/redis/redis/2.8/redis.conf).
-*   自我记录[redis.conf for Redis 2.6](https://raw.githubusercontent.com/redis/redis/2.6/redis.conf).
-*   自我记录[redis.conf for Redis 2.4](https://raw.githubusercontent.com/redis/redis/2.4/redis.conf).
+*   记录在[redis.conf for Redis 7.0](https://raw.githubusercontent.com/redis/redis/7.0/redis.conf).
+*   记录在[redis.conf for Redis 6.2](https://raw.githubusercontent.com/redis/redis/6.2/redis.conf).
+*   记录在[redis.conf for Redis 6.0](https://raw.githubusercontent.com/redis/redis/6.0/redis.conf).
+*   记录在[redis.conf for Redis 5.0](https://raw.githubusercontent.com/redis/redis/5.0/redis.conf).
+*   记录在[redis.conf for Redis 4.0](https://raw.githubusercontent.com/redis/redis/4.0/redis.conf).
+*   记录在[redis.conf for Redis 3.2](https://raw.githubusercontent.com/redis/redis/3.2/redis.conf).
+*   记录在[redis.conf for Redis 3.0](https://raw.githubusercontent.com/redis/redis/3.0/redis.conf).
+*   记录在[redis.conf for Redis 2.8](https://raw.githubusercontent.com/redis/redis/2.8/redis.conf).
+*   记录在[redis.conf for Redis 2.6](https://raw.githubusercontent.com/redis/redis/2.6/redis.conf).
+*   记录在[redis.conf for Redis 2.4](https://raw.githubusercontent.com/redis/redis/2.4/redis.conf).
 
 ## 通过命令行传递参数
 
@@ -46,9 +46,9 @@ Redis 能够在没有配置文件的情况下使用内置的默认值启动配�
 
     ./redis-server --port 6380 --replicaof 127.0.0.1 6379
 
-通过命令行传递的参数的格式完全相同作为 redis.conf 文件中使用的那个，但关键字除外以 为前缀`--`.
+通过命令行传递的参数格式与 redis.conf 文件中使用的格式完全相同，不同之处在于关键字以 `--` 为前缀.
 
-请注意，在内部，这会生成一个内存中的临时配置文件（可能连接用户传递的配置文件，如果有）参数被翻译成 redis.conf 的格式。
+请注意，这在内部会生成一个内存中的临时配置文件(可能连接用户传递的配置文件，如果有的话)，其中参数被转换为 redis.conf 的格式。
 
 ## 在服务器运行时更改 Redis 配置
 
@@ -56,18 +56,21 @@ Redis 能够在没有配置文件的情况下使用内置的默认值启动配�
 
 并非所有配置指令都以这种方式受支持，但大多数按预期方式受支持。请参阅`CONFIG SET`和`CONFIG GET`页以获取更多信息。
 
-请注意，动态修改配置**对redis.conf file**因此，在下次重新启动 Redis 时，旧配置将请改用。
+请注意，即时修改配置**对 redis.conf 文件没有影响**，因此在下次重新启动 Redis 时，将使用旧配置代替。
 
-确保还要修改`redis.conf`文件，根据配置您设置使用`CONFIG SET`.您可以手动执行此操作，也可以使用`CONFIG REWRITE`，它将自动扫描您的`redis.conf`文件并更新与当前配置值不匹配的字段。不会添加不存在但设置为默认值的字段。配置文件中的注释将被保留。
+确保还根据您使用 `CONFIG SET` 设置的配置修改 `redis.conf` 文件。
+您可以手动执行，也可以使用 `CONFIG REWRITE`，它会自动扫描您的 `redis.conf` 文件并更新与当前配置值不匹配的字段。
+不添加不存在但设置为默认值的字段。
+保留配置文件中的注释。
 
 ## 将 Redis 配置为缓存
 
-如果您计划将 Redis 用作缓存，其中每个密钥都有一个过期集，可以考虑改用以下配置（以最大内存限制为 2 MB 为例）：
+如果您计划将 Redis 用作缓存，其中每个 key 都有一个过期集，可以考虑改用以下配置（以最大内存限制为 2 MB 为例）：
 
     maxmemory 2mb
     maxmemory-policy allkeys-lru
 
-在此配置中，应用程序无需设置时间生活键使用`EXPIRE`命令（或等效命令），因为所有密钥都将使用近似的 LRU 算法逐出，只要当我们达到2兆字节内存限制时。
+在此配置中，应用程序无需使用 "EXPIRE" 命令（或等效命令）为 key 设置生存时间，因为只要我们达到 2 兆字节的内存限制，所有密钥都将使用近似的 LRU 算法被驱逐。
 
-基本上，在这种配置中，Redis的行为方式与memcached类似。
+基本上，在这种配置中，Redis 的行为方式与 memcached 类似。
 我们有更多关于使用 Redis 作为 LRU 缓存的文档[这里](/topics/lru-cache).

@@ -58,31 +58,21 @@ as a replica of the instance running at 127.0.0.1 port 6379.
 
     ./redis-server --port 6380 --replicaof 127.0.0.1 6379
 
-The format of the arguments passed via the command line is exactly the same
-as the one used in the redis.conf file, with the exception that the keyword
-is prefixed with `--`.
+The format of the arguments passed via the command line is exactly the same as the one used in the redis.conf file, with the exception that the keyword is prefixed with `--`.
 
-Note that internally this generates an in-memory temporary config file
-(possibly concatenating the config file passed by the user, if any) where
-arguments are translated into the format of redis.conf.
+Note that internally this generates an in-memory temporary config file (possibly concatenating the config file passed by the user, if any) where arguments are translated into the format of redis.conf.
 
 Changing Redis configuration while the server is running
 ---
 
-It is possible to reconfigure Redis on the fly without stopping and restarting
-the service, or querying the current configuration programmatically using the
-special commands `CONFIG SET` and `CONFIG GET`.
+It is possible to reconfigure Redis on the fly without stopping and restarting the service, or querying the current configuration programmatically using the special commands `CONFIG SET` and `CONFIG GET`.
 
-Not all of the configuration directives are supported in this way, but most
-are supported as expected.
+Not all of the configuration directives are supported in this way, but most are supported as expected.
 Please refer to the `CONFIG SET` and `CONFIG GET` pages for more information.
 
-Note that modifying the configuration on the fly **has no effects on the
-redis.conf file** so at the next restart of Redis the old configuration will
-be used instead.
+Note that modifying the configuration on the fly **has no effects on the redis.conf file** so at the next restart of Redis the old configuration will be used instead.
 
-Make sure to also modify the `redis.conf` file accordingly to the configuration
-you set using `CONFIG SET`.
+Make sure to also modify the `redis.conf` file accordingly to the configuration you set using `CONFIG SET`.
 You can do it manually, or you can use `CONFIG REWRITE`, which will automatically scan your `redis.conf` file and update the fields which don't match the current configuration value.
 Fields non existing but set to the default value are not added.
 Comments inside your configuration file are retained.
@@ -97,10 +87,7 @@ expire set, you may consider using the following configuration instead
     maxmemory 2mb
     maxmemory-policy allkeys-lru
 
-In this configuration there is no need for the application to set a
-time to live for keys using the `EXPIRE` command (or equivalent) since
-all the keys will be evicted using an approximated LRU algorithm as long
-as we hit the 2 megabyte memory limit.
+In this configuration there is no need for the application to set a time to live for keys using the `EXPIRE` command (or equivalent) since all the keys will be evicted using an approximated LRU algorithm as long as we hit the 2 megabyte memory limit.
 
 Basically, in this configuration Redis acts in a similar way to memcached.
 We have more extensive documentation about using Redis as an LRU cache [here](/topics/lru-cache).
