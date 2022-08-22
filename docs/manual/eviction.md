@@ -11,14 +11,9 @@ aliases: [
 ]
 ---
 
-When Redis is used as a cache, it is often convenient to let it automatically
-evict old data as you add new data. This behavior is well known in the
-developer community, since it is the default behavior for the popular
-*memcached* system.
+When Redis is used as a cache, it is often convenient to let it automatically evict old data as you add new data. This behavior is well known in the developer community, since it is the default behavior for the popular *memcached* system.
 
-This page covers the more general topic of the Redis `maxmemory` directive used to limit the memory usage to a fixed amount. This page it also covers in
-depth the LRU eviction algorithm used by Redis, that is actually an approximation of
-the exact LRU.
+This page covers the more general topic of the Redis `maxmemory` directive used to limit the memory usage to a fixed amount. This page it also covers in depth the LRU eviction algorithm used by Redis, that is actually an approximation of the exact LRU.
 
 ## `Maxmemory` configuration directive
 
@@ -32,14 +27,10 @@ following directive inside the `redis.conf` file:
 
     maxmemory 100mb
 
-Setting `maxmemory` to zero results into no memory limits. This is the
-default behavior for 64 bit systems, while 32 bit systems use an implicit
-memory limit of 3GB.
+Setting `maxmemory` to zero results into no memory limits. This is the default behavior for 64 bit systems, while 32 bit systems use an implicit memory limit of 3GB.
 
 When the specified amount of memory is reached, how **eviction policies** are configured determines the default behavior.
-Redis can return errors for commands that could result in more memory
-being used, or it can evict some old data to return back to the
-specified limit every time new data is added.
+Redis can return errors for commands that could result in more memory being used, or it can evict some old data to return back to the specified limit every time new data is added.
 
 ## Eviction policies
 
@@ -58,10 +49,7 @@ The following policies are available:
 
 The policies **volatile-lru**, **volatile-lfu**, **volatile-random**, and **volatile-ttl** behave like **noeviction** if there are no keys to evict matching the prerequisites.
 
-Picking the right eviction policy is important depending on the access pattern
-of your application, however you can reconfigure the policy at runtime while
-the application is running, and monitor the number of cache misses and hits
-using the Redis `INFO` output to tune your setup.
+Picking the right eviction policy is important depending on the access pattern of your application, however you can reconfigure the policy at runtime while the application is running, and monitor the number of cache misses and hits using the Redis `INFO` output to tune your setup.
 
 In general as a rule of thumb:
 
