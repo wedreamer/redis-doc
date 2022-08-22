@@ -47,11 +47,7 @@ this pattern can greatly reduce the latency for the application to get data
 and, at the same time, the load in the database side.
 
 Moreover there are many datasets where items change very infrequently.
-For instance, most user posts in a social network are either immutable or
-rarely edited by the user. Adding to this the fact that usually a small
-percentage of the posts are very popular, either because a small set of users
-have a lot of followers and/or because recent posts have a lot more
-visibility, it is clear why such a pattern can be very useful.
+For instance, most user posts in a social network are either immutable or rarely edited by the user. Adding to this the fact that usually a small percentage of the posts are very popular, either because a small set of users have a lot of followers and/or because recent posts have a lot more visibility, it is clear why such a pattern can be very useful.
 
 Usually the two key advantages of client-side caching are:
 
@@ -60,23 +56,9 @@ Usually the two key advantages of client-side caching are:
 
 ## There are two hard problems in computer science...
 
-A problem with the above pattern is how to invalidate the information that
-the application is holding, in order to avoid presenting stale data to the
-user. For example after the application above locally cached the information
-for user:1234, Alice may update her username to Flora. Yet the application
-may continue to serve the old username for user:1234.
+A problem with the above pattern is how to invalidate the information that the application is holding, in order to avoid presenting stale data to the user. For example after the application above locally cached the information for user:1234, Alice may update her username to Flora. Yet the application may continue to serve the old username for user:1234.
 
-Sometimes, depending on the exact application we are modeling, this isn't a
-big deal, so the client will just use a fixed maximum "time to live" for the
-cached information. Once a given amount of time has elapsed, the information
-will no longer be considered valid. More complex patterns, when using Redis,
-leverage the Pub/Sub system in order to send invalidation messages to
-listening clients. This can be made to work but is tricky and costly from
-the point of view of the bandwidth used, because often such patterns involve
-sending the invalidation messages to every client in the application, even
-if certain clients may not have any copy of the invalidated data. Moreover
-every application query altering the data requires to use the `PUBLISH`
-command, costing the database more CPU time to process this command.
+Sometimes, depending on the exact application we are modeling, this isn't a big deal, so the client will just use a fixed maximum "time to live" for the cached information. Once a given amount of time has elapsed, the information will no longer be considered valid. More complex patterns, when using Redis, leverage the Pub/Sub system in order to send invalidation messages to listening clients. This can be made to work but is tricky and costly from the point of view of the bandwidth used, because often such patterns involve sending the invalidation messages to every client in the application, even if certain clients may not have any copy of the invalidated data. Moreover every application query altering the data requires to use the `PUBLISH` command, costing the database more CPU time to process this command.
 
 Regardless of what schema is used, there is a simple fact: many very large
 applications implement some form of client-side caching, because it is the
@@ -194,17 +176,9 @@ as `push` messages (read the RESP3 specification for more information).
 
 ## What tracking tracks
 
-As you can see clients do not need, by default, to tell the server what keys
-they are caching. Every key that is mentioned in the context of a read-only
-command is tracked by the server, because it *could be cached*.
+As you can see clients do not need, by default, to tell the server what keys they are caching. Every key that is mentioned in the context of a read-only command is tracked by the server, because it *could be cached*.
 
-This has the obvious advantage of not requiring the client to tell the server
-what it is caching. Moreover in many clients implementations, this is what
-you want, because a good solution could be to just cache everything that is not
-already cached, using a first-in first-out approach: we may want to cache a
-fixed number of objects, every new data we retrieve, we could cache it,
-discarding the oldest cached object. More advanced implementations may instead
-drop the least used object or alike.
+This has the obvious advantage of not requiring the client to tell the server what it is caching. Moreover in many clients implementations, this is what you want, because a good solution could be to just cache everything that is not already cached, using a first-in first-out approach: we may want to cache a fixed number of objects, every new data we retrieve, we could cache it, discarding the oldest cached object. More advanced implementations may instead drop the least used object or alike.
 
 Note that anyway if there is write traffic on the server, caching slots
 will get invalidated during the course of the time. In general when the
@@ -235,17 +209,12 @@ In this mode, by default, keys mentioned in read queries *are not supposed to be
     GET foo
     "bar"
 
-The `CACHING` command affects the command executed immediately after it,
-however in case the next command is `MULTI`, all the commands in the
-transaction will be tracked. Similarly in case of Lua scripts, all the
-commands executed by the script will be tracked.
+The `CACHING` command affects the command executed immediately after it, however in case the next command is `MULTI`, all the commands in the transaction will be tracked. Similarly in case of Lua scripts, all the commands executed by the script will be tracked.
 
 ## Broadcasting mode
 
 So far we described the first client-side caching model that Redis implements.
-There is another one, called broadcasting, that sees the problem from the
-point of view of a different tradeoff, does not consume any memory on the
-server side, but instead sends more invalidation messages to clients.
+There is another one, called broadcasting, that sees the problem from the point of view of a different tradeoff, does not consume any memory on the server side, but instead sends more invalidation messages to clients.
 In this mode we have the following main behaviors:
 
 * Clients enable client-side caching using the `BCAST` option, specifying one or more prefixes using the `PREFIX` option. For instance: `CLIENT TRACKING on REDIRECT 10 BCAST PREFIX object: PREFIX user:`. If no prefix is specified at all, the prefix is assumed to be the empty string, so the client will receive invalidation messages for every key that gets modified. Instead if one or more prefixes are used, only keys matching one of the specified prefixes will be sent in the invalidation messages.
@@ -257,35 +226,20 @@ In this mode we have the following main behaviors:
 
 ## The NOLOOP option
 
-By default client-side tracking will send invalidation messages to the
-client that modified the key. Sometimes clients want this, since they
-implement very basic logic that does not involve automatically caching
-writes locally. However, more advanced clients may want to cache even the
-writes they are doing in the local in-memory table. In such case receiving
-an invalidation message immediately after the write is a problem, since it
-will force the client to evict the value it just cached.
+By default client-side tracking will send invalidation messages to the client that modified the key. Sometimes clients want this, since they implement very basic logic that does not involve automatically caching writes locally. However, more advanced clients may want to cache even the writes they are doing in the local in-memory table. In such case receiving an invalidation message immediately after the write is a problem, since it will force the client to evict the value it just cached.
 
-In this case it is possible to use the `NOLOOP` option: it works both
-in normal and broadcasting mode. Using this option, clients are able to
-tell the server they don't want to receive invalidation messages for keys
-that they modified.
+In this case it is possible to use the `NOLOOP` option: it works both in normal and broadcasting mode. Using this option, clients are able to tell the server they don't want to receive invalidation messages for keys that they modified.
 
 ## Avoiding race conditions
 
-When implementing client-side caching redirecting the invalidation messages
-to a different connection, you should be aware that there is a possible
-race condition. See the following example interaction, where we'll call
-the data connection "D" and the invalidation connection "I":
+When implementing client-side caching redirecting the invalidation messages to a different connection, you should be aware that there is a possible race condition. See the following example interaction, where we'll call the data connection "D" and the invalidation connection "I":
 
     [D] client -> server: GET foo
     [I] server -> client: Invalidate foo (somebody else touched it)
     [D] server -> client: "bar" (the reply of "GET foo")
 
 As you can see, because the reply to the GET was slower to reach the
-client, we received the invalidation message before the actual data that
-is already no longer valid. So we'll keep serving a stale version of the
-foo key. To avoid this problem, it is a good idea to populate the cache
-when we send the command with a placeholder:
+client, we received the invalidation message before the actual data that is already no longer valid. So we'll keep serving a stale version of the foo key. To avoid this problem, it is a good idea to populate the cache when we send the command with a placeholder:
 
     Client cache: set the local copy of "foo" to "caching-in-progress"
     [D] client-> server: GET foo.
@@ -294,9 +248,7 @@ when we send the command with a placeholder:
     [D] server -> client: "bar" (the reply of "GET foo")
     Client cache: don't set "bar" since the entry for "foo" is missing.
 
-Such a race condition is not possible when using a single connection for both
-data and invalidation messages, since the order of the messages is always known
-in that case.
+Such a race condition is not possible when using a single connection for both data and invalidation messages, since the order of the messages is always known in that case.
 
 ## What to do when losing connection with the server
 
@@ -309,9 +261,7 @@ this problem, we need to do the following things:
 
 ## What to cache
 
-Clients may want to run internal statistics about the number of times
-a given cached key was actually served in a request, to understand in the
-future what is good to cache. In general:
+Clients may want to run internal statistics about the number of times a given cached key was actually served in a request, to understand in the future what is good to cache. In general:
 
 * We don't want to cache many keys that change continuously.
 * We don't want to cache many keys that are requested very rarely.
