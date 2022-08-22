@@ -10,7 +10,7 @@ aliases:
 
 Redis 使用称为 Redis Cluster 的部署拓扑进行水平扩展。
 
-本文档对 Redis Cluster 进行了温和的介绍, 教您如何在生产环境中设置、测试和操作 Redis 集群。
+本文档对 Redis Cluster 进行了有好的介绍, 教您如何在生产环境中设置、测试和操作 Redis 集群。
 
 本教程还介绍了可用性从角度看 Redis 集群的一致性特征的最终用户, 以简单易懂的方式陈述。
 
