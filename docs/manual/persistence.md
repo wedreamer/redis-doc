@@ -18,8 +18,7 @@ Persistence refers to the writing of data to durable storage, such as a solid-st
 * **No persistence**: If you wish, you can disable persistence completely, if you want your data to just exist as long as the server is running.
 * **RDB + AOF**: It is possible to combine both AOF and RDB in the same instance. Notice that, in this case, when Redis restarts the AOF file will be used to reconstruct the original dataset since it is guaranteed to be the most complete.
 
-The most important thing to understand is the different trade-offs between the
-RDB and AOF persistence.
+The most important thing to understand is the different trade-offs between the RDB and AOF persistence.
 
 ## RDB advantages
 
@@ -58,12 +57,9 @@ Ok, so what should I use?
 The general indication you should use both persistence methods is if
 you want a degree of data safety comparable to what PostgreSQL can provide you.
 
-If you care a lot about your data, but still can live with a few minutes of
-data loss in case of disasters, you can simply use RDB alone.
+If you care a lot about your data, but still can live with a few minutes of data loss in case of disasters, you can simply use RDB alone.
 
-There are many users using AOF alone, but we discourage it since to have an
-RDB snapshot from time to time is a great idea for doing database backups,
-for faster restarts, and in the event of bugs in the AOF engine.
+There are many users using AOF alone, but we discourage it since to have an RDB snapshot from time to time is a great idea for doing database backups, for faster restarts, and in the event of bugs in the AOF engine.
 
 The following sections will illustrate a few more details about the two persistence models.
 
@@ -71,11 +67,9 @@ The following sections will illustrate a few more details about the two persiste
 
 By default Redis saves snapshots of the dataset on disk, in a binary
 file called `dump.rdb`. You can configure Redis to have it save the
-dataset every N seconds if there are at least M changes in the dataset,
-or you can manually call the `SAVE` or `BGSAVE` commands.
+dataset every N seconds if there are at least M changes in the dataset, or you can manually call the `SAVE` or `BGSAVE` commands.
 
-For example, this configuration will make Redis automatically dump the
-dataset to disk every 60 seconds if at least 1000 keys changed:
+For example, this configuration will make Redis automatically dump the dataset to disk every 60 seconds if at least 1000 keys changed:
 
     save 60 1000
 
@@ -90,18 +84,13 @@ and a parent process.
 
 * The child starts to write the dataset to a temporary RDB file.
 
-* When the child is done writing the new RDB file, it replaces the old
-one.
+* When the child is done writing the new RDB file, it replaces the old one.
 
 This method allows Redis to benefit from copy-on-write semantics.
 
 ## Append-only file
 
-Snapshotting is not very durable. If your computer running Redis stops,
-your power line fails, or you accidentally `kill -9` your instance, the
-latest data written to Redis will be lost.  While this may not be a big
-deal for some applications, there are use cases for full durability, and
-in these cases Redis snapshotting alone is not a viable option.
+Snapshotting is not very durable. If your computer running Redis stops, your power line fails, or you accidentally `kill -9` your instance, the latest data written to Redis will be lost.  While this may not be a big deal for some applications, there are use cases for full durability, and in these cases Redis snapshotting alone is not a viable option.
 
 The _append-only file_ is an alternative, fully-durable strategy for
 Redis.  It became available in version 1.1.
@@ -110,9 +99,7 @@ You can turn on the AOF in your configuration file:
 
     appendonly yes
 
-From now on, every time Redis receives a command that changes the
-dataset (e.g. `SET`) it will append it to the AOF.  When you restart
-Redis it will re-play the AOF to rebuild the state.
+From now on, every time Redis receives a command that changes the dataset (e.g. `SET`) it will append it to the AOF.  When you restart Redis it will re-play the AOF to rebuild the state.
 
 Since Redis 7.0.0, Redis uses a multi part AOF mechanism.
 That is, the original single AOF file is split into base file (at most one) and incremental files (there may be more than one).
@@ -121,24 +108,14 @@ The incremental files contains incremental changes since the last base AOF file 
 
 ### Log rewriting
 
-The AOF gets bigger and bigger as write operations are
-performed.  For example, if you are incrementing a counter 100 times,
-you'll end up with a single key in your dataset containing the final
-value, but 100 entries in your AOF. 99 of those entries are not needed
-to rebuild the current state.
+The AOF gets bigger and bigger as write operations are performed.  For example, if you are incrementing a counter 100 times, you'll end up with a single key in your dataset containing the final value, but 100 entries in your AOF. 99 of those entries are not needed to rebuild the current state.
 
 The rewrite is completely safe.
 While Redis continues appending to the old file,
 a completely new one is produced with the minimal set of operations needed to create the current data set,
 and once this second file is ready Redis switches the two and starts appending to the new one.
 
-So Redis supports an interesting feature: it is able to rebuild the AOF
-in the background without interrupting service to clients. Whenever
-you issue a `BGREWRITEAOF`, Redis will write the shortest sequence of
-commands needed to rebuild the current dataset in memory.  If you're
-using the AOF with Redis 2.2 you'll need to run `BGREWRITEAOF` from time to
-time. Since Redis 2.4 is able to trigger log rewriting automatically (see the
-example configuration file for more information).
+So Redis supports an interesting feature: it is able to rebuild the AOF in the background without interrupting service to clients. Whenever you issue a `BGREWRITEAOF`, Redis will write the shortest sequence of commands needed to rebuild the current dataset in memory.  If you're using the AOF with Redis 2.2 you'll need to run `BGREWRITEAOF` from time to time. Since Redis 2.4 is able to trigger log rewriting automatically (see the example configuration file for more information).
 
 Since Redis 7.0.0, when an AOF rewrite is scheduled, the Redis parent process opens a new incremental AOF file to continue writing.
 The child process executes the rewrite logic and generates a new base AOF.
@@ -157,21 +134,13 @@ three options:
 * `appendfsync everysec`: `fsync` every second. Fast enough (since version 2.4 likely to be as fast as snapshotting), and you may lose 1 second of data if there is a disaster.
 * `appendfsync no`: Never `fsync`, just put your data in the hands of the Operating System. The faster and less safe method. Normally Linux will flush data every 30 seconds with this configuration, but it's up to the kernel's exact tuning.
 
-The suggested (and default) policy is to `fsync` every second. It is
-both fast and relatively safe. The `always` policy is very slow in
-practice, but it supports group commit, so if there are multiple parallel
-writes Redis will try to perform a single `fsync` operation.
+The suggested (and default) policy is to `fsync` every second. It is both fast and relatively safe. The `always` policy is very slow in practice, but it supports group commit, so if there are multiple parallel writes Redis will try to perform a single `fsync` operation.
 
 ### What should I do if my AOF gets truncated?
 
 It is possible the server crashed while writing the AOF file, or the
-volume where the AOF file is stored was full at the time of writing. When this happens the
-AOF still contains consistent data representing a given point-in-time version
-of the dataset (that may be old up to one second with the default AOF fsync
-policy), but the last command in the AOF could be truncated.
-The latest major versions of Redis will be able to load the AOF anyway, just
-discarding the last non well formed command in the file. In this case the
-server will emit a log like the following:
+volume where the AOF file is stored was full at the time of writing. When this happens the AOF still contains consistent data representing a given point-in-time version of the dataset (that may be old up to one second with the default AOF fsync policy), but the last command in the AOF could be truncated.
+The latest major versions of Redis will be able to load the AOF anyway, just discarding the last non well formed command in the file. In this case the server will emit a log like the following:
 
 ```
 * Reading RDB preamble from AOF file...
@@ -181,10 +150,7 @@ server will emit a log like the following:
 # AOF loaded anyway because aof-load-truncated is enabled
 ```
 
-You can change the default configuration to force Redis to stop in such
-cases if you want, but the default configuration is to continue regardless of
-the fact the last command in the file is not well-formed, in order to guarantee
-availability after a restart.
+You can change the default configuration to force Redis to stop in such cases if you want, but the default configuration is to continue regardless of the fact the last command in the file is not well-formed, in order to guarantee availability after a restart.
 
 Older versions of Redis may not recover, and may require the following steps:
 
