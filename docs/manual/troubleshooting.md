@@ -25,8 +25,7 @@ To find a list of critical bugs please refer to the changelogs:
 * [Redis 2.8 Changelog](https://raw.githubusercontent.com/redis/redis/2.8/00-RELEASENOTES).
 * [Redis 2.6 Changelog](https://raw.githubusercontent.com/redis/redis/2.6/00-RELEASENOTES).
 
-Check the *upgrade urgency* level in each patch release to more easily spot
-releases that included important fixes.
+Check the *upgrade urgency* level in each patch release to more easily spot releases that included important fixes.
 
 ### List of known Linux related bugs affecting Redis.
 
